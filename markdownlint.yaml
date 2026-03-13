@@ -1,0 +1,49 @@
+# Filename: ~/kickstart.nvim/markdownlint.yaml
+#
+# https://github.com/DavidAnson/markdownlint
+#
+# Used by markdownlint-cli2 via nvim-lint (mfussenegger/nvim-lint).
+# This file is pointed to explicitly in lint.lua so it applies everywhere.
+
+# MD004 — Unordered list style (-, *, +)
+# Disabled because the TOC generator uses symbols other than -
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md004.md
+MD004: false
+
+# MD009 — Trailing spaces
+# Disabled as it's often more annoying than helpful
+MD009: false
+
+# MD007 — Unordered list indentation
+# Disabled because some docs (e.g. Confluence exports) use 4-space indenting
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md007.md
+MD007: false
+
+# MD010 — Hard tabs
+# Allowed inside code blocks (some languages require tabs, e.g. Makefiles)
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md
+MD010:
+  code_blocks: false
+
+# MD012 — Multiple consecutive blank lines
+# Raised to 2 because some editors/tools add a trailing blank line,
+# causing false positives at end of file
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md012.md
+MD012: false
+
+# MD013 — Line length
+# Disabled because autoformatting handles this, and long markdown links
+# (e.g. {:target="_blank"}) would trigger it unavoidably
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md013.md
+MD013: false
+
+# MD030 — Spaces after list markers
+# Disabled for Confluence compatibility (requires non-standard spacing)
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md030.md
+MD030: false
+
+# MD033 — Inline HTML
+# Disabled because HTML is intentionally used in GitHub READMEs
+# e.g. <details>, <summary>, <img> tags
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md033.md
+MD033: false
