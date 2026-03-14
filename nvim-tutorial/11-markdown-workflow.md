@@ -354,13 +354,8 @@ Provides IDE-grade features for your notes:
 - **Global Rename**: `<leader>rn` renames a note and updates all links across your entire vault.
 - **Unresolved Links**: Instantly spot links that haven't been created yet.
 
-### 3. Git Auto-Sync (`markdown-sync.lua`)
-
-Zero-effort backup:
-
-- Every save (`:w`) triggers a background Git sync.
-- Automates `git add .`, `git commit -m "Auto-save: ..."` and `git push`.
-- Works silently in the background via `jobstart` to ensure your editor never freezes.
+### 3. Git Auto-Sync
+- **Removed**: Git auto-sync functionality has been completely removed to prioritize privacy and reduce `.git` directory bloat. Syncthing is the preferred external backup solution.
 
 ---
 
