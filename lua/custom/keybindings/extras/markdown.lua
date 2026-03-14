@@ -743,7 +743,9 @@ vim.keymap.set("v", "<leader>mx", function()
 	if selected_text:match("^%~%~.*%~%~$") then
 		vim.notify("Text already has strikethrough", vim.log.levels.INFO)
 	else
-		vim.cmd.normal({ "2S~" })
+		-- vim-surround doesn't support 2S~ natively, so we use vim's native change and paste
+		local keys = vim.api.nvim_replace_termcodes("c~~<C-r>\"~~<Esc>", true, false, true)
+		vim.api.nvim_feedkeys(keys, "m", false)
 	end
 end, { desc = "[P]Strike through current selection" })
 
@@ -759,7 +761,9 @@ vim.keymap.set("v", "<leader>mb", function()
 	if selected_text:match("^%*%*.*%*%*$") then
 		vim.notify("Text already bold", vim.log.levels.INFO)
 	else
-		vim.cmd.normal({ "2S*" })
+		-- vim-surround doesn't support 2S* natively
+		local keys = vim.api.nvim_replace_termcodes("c**<C-r>\"**<Esc>", true, false, true)
+		vim.api.nvim_feedkeys(keys, "m", false)
 	end
 end, { desc = "[P]BOLD current selection" })
 
@@ -820,10 +824,12 @@ vim.keymap.set("n", "<leader>mb", function()
 		local after = line:sub(col + 1)
 		local inside_surround = before:match("%*%*[^%*]*$") and after:match("^[^%*]*%*%*")
 		if inside_surround then
-			vim.cmd.normal({ "ds*ds*" })
+			local keys = vim.api.nvim_replace_termcodes("ds*ds*", true, false, true)
+			vim.api.nvim_feedkeys(keys, "m", false)
 		else
 			vim.cmd.normal({ "viw" })
-			vim.cmd.normal({ "2S*" })
+			local keys = vim.api.nvim_replace_termcodes("c**<C-r>\"**<Esc>", true, false, true)
+			vim.api.nvim_feedkeys(keys, "m", false)
 		end
 		vim.notify("Bolded current word", vim.log.levels.INFO)
 	end

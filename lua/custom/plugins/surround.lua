@@ -1,10 +1,10 @@
 return {
-	"kylechui/nvim-surround",
-	version = "*", -- Use for stability; omit to use `main` branch for the latest features
+	-- tpope's classic vim-surround plugin
+	"tpope/vim-surround",
 	event = "VeryLazy",
-	config = function()
-		require("nvim-surround").setup({
-			-- Configuration here, or leave empty to use defaults
-		})
-	end,
+	dependencies = {
+		-- vim-surround depends on vim-repeat for the dot (.) command to work properly
+		"tpope/vim-repeat",
+	},
 }
+
