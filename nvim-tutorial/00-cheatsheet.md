@@ -190,7 +190,6 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | Key          | Action                 |
 | ------------ | ---------------------- |
 | `K`          | Hover + actions        |
-| `<leader>cr` | Code action            |
 | `<leader>ce` | [E]xplain error        |
 | `<leader>cm` | [M]acro expand         |
 | `<leader>cc` | [C]argo: open toml     |
