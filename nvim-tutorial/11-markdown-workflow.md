@@ -281,6 +281,23 @@ that increase/decrease heading levels.
 `<leader>mfA` — Runs conform/prettier on every `.md` file in the git repository.
 Useful for batch-normalising a documentation site.
 
+### Special Markdown Yank (`v` → `y`)
+
+When you are in visual mode in a markdown file, pressing `y` does more than a standard yank:
+1. **Unwraps Prose**: It runs `prettier --prose-wrap never` on your selection. Since your buffer is formatted with `proseWrap: always` (80-char hard breaks), this joins those lines back together.
+2. **Clean Background Process**: This happens asynchronously via `jobstart` to prevent any UI freeze.
+3. **Purity**: It automatically strips the trailing newline that prettier appends.
+
+**Why it matters:** When you paste markdown into Slack, Discord, or a browser, those 80-char hard breaks appear as ugly line breaks. This yank gives you clean, flowing text for external apps while keeping your buffer perfectly wrapped.
+
+### Markdown Linter Configuration
+
+Your `markdownlint` is configured via `nvim-lint` to use a custom `markdownlint.yaml` in your nvim config directory.
+- **Rule MD013 (Line Length)**: This rule is explicitly **disabled**.
+- **Reasoning**: We let Prettier handle the 80-char wrapping on save. We don't want the linter yelling at us about line length while we are typing or for long links that shouldn't be broken.
+
+---
+
 ### YouTube embed management
 
 `<leader>mfy` / `<leader>mfY` — Moves YouTube `{% include embed/youtube.html %}` tags
