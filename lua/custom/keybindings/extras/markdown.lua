@@ -629,8 +629,8 @@ end, { desc = "[P]Spelling language English" })
 -- https://youtu.be/uLFAMYFmpkE
 --
 -- Keymap to switch spelling language to German lamw25wmal
-vim.keymap.set("n", "<leader>msls", function()
-	vim.opt.spelllang = "es"
+vim.keymap.set("n", "<leader>mslg", function()
+	vim.opt.spelllang = "de"
 	print("Spell language set to German")
 end, { desc = "[P]Spelling language German" })
 
@@ -639,7 +639,7 @@ end, { desc = "[P]Spelling language German" })
 --
 -- Keymap to switch spelling language to both german and english lamw25wmal
 vim.keymap.set("n", "<leader>mslb", function()
-	vim.opt.spelllang = "en,es"
+	vim.opt.spelllang = "en,de"
 	print("Spell language set to German and English")
 end, { desc = "[P]Spelling language German and English" })
 
@@ -1128,8 +1128,8 @@ end, { desc = "[P]Insert/update Markdown TOC (English)" })
 -- https://youtu.be/BVyrXsZ_ViA
 --
 -- Keymap for German TOC lamw25wmal
-vim.keymap.set("n", "<leader>mts", function()
-	update_markdown_toc("## Contenido", "### Tabla de contenido")
+vim.keymap.set("n", "<leader>mtg", function()
+	update_markdown_toc("## Inhalt", "### Inhaltsverzeichnis")
 end, { desc = "[P]Insert/update Markdown TOC (German)" })
 
 -- Save the cursor position globally to access it across different mappings

@@ -18,12 +18,15 @@ re-renders.
 ### What renders
 
 **Headings** — Full-width coloured background bars with custom icons:
+
 ```
 󰲡 Your Heading Here
 ```
+
 The icons `󰲡 󰲣 󰲥 󰲧 󰲩 󰲫` correspond to H1–H6.
 
 **Code blocks** — Language tag shown on left, dark background, fence delimiters hidden:
+
 ```
 lua  ← shown in colour
 local x = 1
@@ -71,18 +74,20 @@ For markdown, headings define fold boundaries.
 
 ### Fold keymaps (markdown/typst only)
 
-| Key | Action |
-|-----|--------|
-| `zj` | Fold all H1 and below (everything) |
-| `zk` | Fold all H2 and below |
-| `zl` | Fold all H3 and below |
-| `z;` | Fold all H4 and below |
-| `zu` | Unfold everything |
-| `zi` | Jump to heading above and fold it |
+| Key    | Action                                      |
+| ------ | ------------------------------------------- |
+| `zj`   | Fold all H1 and below (everything)          |
+| `zk`   | Fold all H2 and below                       |
+| `zl`   | Fold all H3 and below                       |
+| `z;`   | Fold all H4 and below                       |
+| `zu`   | Unfold everything                           |
+| `zi`   | Jump to heading above and fold it           |
 | `<CR>` | Toggle fold at cursor (Markdown/Typst only) |
 
 ### Linkarzu Style Clean Visuals
+
 Your folds are configured to look clean:
+
 - **No prefix**: The bulky `+---` prefix is removed.
 - **No trailing dashes**: The fill characters are cleared.
 - **Table of Contents**: When you open a file, all headings start folded, giving you an immediate, clean navigation view.
@@ -100,6 +105,7 @@ correctly — the frontmatter `---` markers don't trigger heading-level folds.
 ### Task states
 
 You have a three-state task system:
+
 - `- [ ]` — pending
 - `- [x]` done: YYMMDD-HHMM\`` — completed (with timestamp)
 - `- [ ]` \``untoggled\`` — explicitly marked as not-done (de-completed)
@@ -107,18 +113,21 @@ You have a three-state task system:
 ### `<M-x>` — the smart task toggle
 
 The most complex keymap in your config. On a `- [ ]` task:
+
 1. Marks it as `- [x]` with a timestamp label
 2. Moves the entire task (including multi-line sub-content) to the `## Completed Tasks`
    section at the bottom of the file
 3. If the section doesn't exist, creates it
 
 On a task in the completed section:
+
 1. Pressing again marks it `untoggled`
 2. Pressing a third time cycles back to done
 
 ### `<M-l>` — create task bullet
 
 Converts the current line into a task or inserts a new `- [ ]` task:
+
 - Empty line → `- [ ] ` (positions cursor after the brackets)
 - Line with `- item` → `- [ ] item` (adds checkbox to existing bullet)
 - Plain text line → `- [ ] text` (wraps in task format)
@@ -136,11 +145,13 @@ Use when you want to check things off without reorganising the file. Found in
 ### img-clip.nvim
 
 **`<leader>ip`** (in `image_pasting.lua`) — Pastes an image from your clipboard into the current markdown file:
+
 1. Saves the image as a file into the `assets/` directory.
 2. Inserts a markdown `![image](assets/path)` reference.
 3. Automatically prompts for a filename to keep your project organized.
 
 **`<M-1>`** (in `extra_keybindings_linkarzu.lua`) — More advanced paste for blog posts:
+
 - Saves to your `assets/img/imgs/` directory
 - Prompts whether it's a thumbnail image
 - Lets you choose format (avif, webp, png, jpg)
@@ -156,7 +167,7 @@ insert it at cursor position.
 image = {
   enabled = true,
   backend = 'kitty', -- Explicitly set to use Kitty graphics protocol
-  doc = { inline = true, float = true, only_render_image_at_cursor = true }
+  doc = { inline = true, float = true, only_render_image_at_cursor = false }
 }
 ```
 
@@ -172,13 +183,17 @@ Images and diagrams referenced in markdown render as actual previews in your ter
 Your setup supports both **PlantUML** and **Mermaid.js** diagrams.
 
 ### 1. PlantUML (Dedicated Viewer)
+
 For professional UML work, you have a dedicated browser-based previewer.
+
 - **Keybinding**: **`<leader>dv`** (Diagram View) while in a `.puml` file.
 - **How it works**: Uses `weirongxu/plantuml-previewer.vim` to compile your diagram using `plantuml` (Java) and open it in your browser.
 - **Sync**: The preview updates automatically whenever you save the file.
 
 ### 2. Mermaid.js (Inline)
+
 Smaller diagrams can be rendered directly in your terminal using the Kitty graphics protocol.
+
 - **How it works**: Snacks.nvim detects `mermaid` code blocks and uses `mmdc` to render them inline.
 - **Treesitter**: Requires the `mermaid` parser (`:TSUpdate mermaid`).
 
@@ -189,6 +204,7 @@ Smaller diagrams can be rendered directly in your terminal using the Kitty graph
 LaTeX math expressions are rendered beautifully in-line.
 
 ### Inline & Block Math
+
 - **Inline**: `$E = mc^2$`
 - **Block**:
   ```latex
@@ -198,7 +214,9 @@ LaTeX math expressions are rendered beautifully in-line.
   ```
 
 ### Rendering Engine
+
 Snacks.nvim uses **Tectonic** (a modern LaTeX engine) or **MathJax** to convert LaTeX strings into high-quality images for terminal display.
+
 - **Enabled via**: `math = { enabled = true }` in snacks config.
 - **Verification**: Run `:checkhealth snacks` to ensure `tectonic` or `mathjax` is detected.
 
@@ -207,6 +225,7 @@ Snacks.nvim uses **Tectonic** (a modern LaTeX engine) or **MathJax** to convert 
 ### Imgur upload (`<M-i>`)
 
 `<M-i>` uploads the image from your clipboard to your authenticated Imgur account:
+
 1. Reads tokens from your credentials file
 2. Posts the image via Imgur API
 3. Inserts the Imgur URL as markdown
@@ -220,11 +239,11 @@ Your script currently points to the iCloud path — if you're on Linux, updated 
 
 ## Image management keymaps
 
-| Keymap | Action |
-|--------|--------|
+| Keymap       | Action                                                     |
+| ------------ | ---------------------------------------------------------- |
 | `<leader>iR` | Rename image under cursor (updates all references in file) |
-| `<leader>id` | Delete image file under cursor (uses `trash` or `rm`) |
-| `<leader>if` | Open image in File Manager (ForkLift/Nautilus/etc) |
+| `<leader>id` | Delete image file under cursor (uses `trash` or `rm`)      |
+| `<leader>if` | Open image in File Manager (ForkLift/Nautilus/etc)         |
 
 ---
 
@@ -250,7 +269,7 @@ Useful for copying out a code block's content, reformatting it, or replacing it.
 
 Uses `markdown-toc` CLI to generate/update a table of contents. Inserts `<!-- toc -->`
 comment marker and a TOC under the first H1. `<leader>mtt` for English headings,
-`<leader>mts` for Spanish.
+`<leader>mtg` for German.
 
 ### Bold/italic/strikethrough
 
@@ -270,15 +289,15 @@ that increase/decrease heading levels.
 
 ### Spell checking
 
-| Keymap | Action |
-|--------|--------|
-| `<leader>msle` | Set spell language to English |
-| `<leader>msls` | Set spell language to Spanish |
-| `<leader>mslb` | Set spell language to both |
-| `<leader>mss` | Accept first spelling suggestion |
-| `<leader>msg` | Mark word as good (add to spellfile) |
-| `<leader>msu` | Undo "good word" |
-| `<leader>msr` | Repeat last correction across file |
+| Keymap         | Action                               |
+| -------------- | ------------------------------------ |
+| `<leader>msle` | Set spell language to English        |
+| `<leader>mslg` | Set spell language to German         |
+| `<leader>mslb` | Set spell language to both           |
+| `<leader>mss`  | Accept first spelling suggestion     |
+| `<leader>msg`  | Mark word as good (add to spellfile) |
+| `<leader>msu`  | Undo "good word"                     |
+| `<leader>msr`  | Repeat last correction across file   |
 
 ### Format all markdown in repo
 
@@ -288,6 +307,7 @@ Useful for batch-normalising a documentation site.
 ### Special Markdown Yank (`v` → `y`)
 
 When you are in visual mode in a markdown file, pressing `y` does more than a standard yank:
+
 1. **Unwraps Prose**: It runs `prettier --prose-wrap never` on your selection. Since your buffer is formatted with `proseWrap: always` (80-char hard breaks), this joins those lines back together.
 2. **Clean Background Process**: This happens asynchronously via `jobstart` to prevent any UI freeze.
 3. **Purity**: It automatically strips the trailing newline that prettier appends.
@@ -297,6 +317,7 @@ When you are in visual mode in a markdown file, pressing `y` does more than a st
 ### Markdown Linter Configuration
 
 Your `markdownlint` is configured via `nvim-lint` to use a custom `markdownlint.yaml` in your nvim config directory.
+
 - **Rule MD013 (Line Length)**: This rule is explicitly **disabled**.
 - **Reasoning**: We let Prettier handle the 80-char wrapping on save. We don't want the linter yelling at us about line length while we are typing or for long links that shouldn't be broken.
 
@@ -317,20 +338,26 @@ Highly specific to your blogging workflow.
 Your setup is a high-performance "Second Brain" environment:
 
 ### 1. Obsidian.nvim Integration
+
 Deep linkage with your vault at `~/Notes`:
+
 - **Smart Following** (`gf`): Wiki-links `[[Note Name]]` and standard links are followed using vault-aware search.
 - **ID Generation**: `:ObsidianNew` generates Zettelkasten-compliant IDs (timestamp + slug).
 - **Daily Notes**: Access your journal instantly using `:ObsidianToday`. Templates are pulled from `06-Templates`.
 - **UI Elements**: Checkboxes, bullets, and external links are enhanced with custom icons and highlights.
 
 ### 2. The Markdown Oxide Engine (LSP)
+
 Provides IDE-grade features for your notes:
+
 - **Vault-wide Backlinks**: `gr` on any note title or link to see all references.
 - **Global Rename**: `<leader>rn` renames a note and updates all links across your entire vault.
 - **Unresolved Links**: Instantly spot links that haven't been created yet.
 
 ### 3. Git Auto-Sync (`markdown-sync.lua`)
+
 Zero-effort backup:
+
 - Every save (`:w`) triggers a background Git sync.
 - Automates `git add .`, `git commit -m "Auto-save: ..."` and `git push`.
 - Works silently in the background via `jobstart` to ensure your editor never freezes.
