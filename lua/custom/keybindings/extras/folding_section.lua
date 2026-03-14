@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Function to fold all headings of a specific level
 local function fold_headings_of_level(level)
 	-- Move to the top of the file without adding to jumplist
-	vim.cmd("keepjumps normal! gg")
+	vim.cmd.normal({ "gg", bang = true, mods = { keepjumps = true } })
 	-- Get the total number of lines
 	local total_lines = vim.fn.line("$")
 	for line = 1, total_lines do
@@ -96,13 +96,13 @@ local function fold_headings_of_level(level)
 		if vim.bo.filetype == "typst" then
 			if line_content:match("^" .. string.rep("=", level) .. "%s") then
 				-- Move the cursor to the current line without adding to jumplist
-				vim.cmd(string.format("keepjumps call cursor(%d, 1)", line))
+				vim.api.nvim_win_set_cursor(0, { line, 0 })
 				-- Check if the current line has a fold level > 0
 				local current_foldlevel = vim.fn.foldlevel(line)
 				if current_foldlevel > 0 then
 					-- Fold the heading if it matches the level
 					if vim.fn.foldclosed(line) == -1 then
-						vim.cmd("normal! za")
+						vim.cmd.normal({ "za", bang = true })
 					end
 					-- else
 					--   vim.notify("No fold at line " .. line, vim.log.levels.WARN)
@@ -115,13 +115,13 @@ local function fold_headings_of_level(level)
 			-- So this will match `## `, `### `, `#### ` for example, which are markdown headings
 			if line_content:match("^" .. string.rep("#", level) .. "%s") then
 				-- Move the cursor to the current line without adding to jumplist
-				vim.cmd(string.format("keepjumps call cursor(%d, 1)", line))
+				vim.api.nvim_win_set_cursor(0, { line, 0 })
 				-- Check if the current line has a fold level > 0
 				local current_foldlevel = vim.fn.foldlevel(line)
 				if current_foldlevel > 0 then
 					-- Fold the heading if it matches the level
 					if vim.fn.foldclosed(line) == -1 then
-						vim.cmd("normal! za")
+						vim.cmd.normal({ "za", bang = true })
 					end
 					-- else
 					--   vim.notify("No fold at line " .. line, vim.log.levels.WARN)
@@ -137,7 +137,7 @@ local function fold_markdown_headings(levels)
 	for _, level in ipairs(levels) do
 		fold_headings_of_level(level)
 	end
-	vim.cmd("nohlsearch")
+	vim.cmd.nohlsearch()
 	-- Restore the view to jump to where I was
 	vim.fn.winrestview(saved_view)
 end
@@ -158,14 +158,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- Keymap for folding markdown headings of level 1 or above
 		bmap("zj", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- vim.keymap.set("n", "<leader>mfj", function()
 			-- Reloads the file to refresh folds, otheriise you have to re-open neovim
-			vim.cmd("edit!")
+			vim.cmd.edit({ bang = true })
 			-- Unfold everything first or I had issues
-			vim.cmd("normal! zR")
+			vim.cmd.normal({ "zR", bang = true })
 			fold_markdown_headings({ 6, 5, 4, 3, 2, 1 })
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold all headings level 1 or above")
 
 		-- HACK: Fold markdown headings in Neovim with a keymap
@@ -175,14 +175,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- I know, it reads like "madafaka" but "k" for me means "2"
 		bmap("zk", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- vim.keymap.set("n", "<leader>mfk", function()
 			-- Reloads the file to refresh folds, otherwise you have to re-open neovim
-			vim.cmd("edit!")
+			vim.cmd.edit({ bang = true })
 			-- Unfold everything first or I had issues
-			vim.cmd("normal! zR")
+			vim.cmd.normal({ "zR", bang = true })
 			fold_markdown_headings({ 6, 5, 4, 3, 2 })
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold all headings level 2 or above")
 
 		-- HACK: Fold markdown headings in Neovim with a keymap
@@ -191,14 +191,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- Keymap for folding markdown headings of level 3 or above
 		bmap("zl", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- vim.keymap.set("n", "<leader>mfl", function()
 			-- Reloads the file to refresh folds, otherwise you have to re-open neovim
-			vim.cmd("edit!")
+			vim.cmd.edit({ bang = true })
 			-- Unfold everything first or I had issues
-			vim.cmd("normal! zR")
+			vim.cmd.normal({ "zR", bang = true })
 			fold_markdown_headings({ 6, 5, 4, 3 })
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold all headings level 3 or above")
 
 		-- HACK: Fold markdown headings in Neovim with a keymap
@@ -207,25 +207,25 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- Keymap for folding markdown headings of level 4 or above
 		bmap("z;", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- vim.keymap.set("n", "<leader>mf;", function()
 			-- Reloads the file to refresh folds, otherwise you have to re-open neovim
-			vim.cmd("edit!")
+			vim.cmd.edit({ bang = true })
 			-- Unfold everything first or I had issues
-			vim.cmd("normal! zR")
+			vim.cmd.normal({ "zR", bang = true })
 			fold_markdown_headings({ 6, 5, 4 })
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold all headings level 4 or above")
 
 		-- Keymap for unfolding markdown headings of level 2 or above
 		bmap("zu", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- vim.keymap.set("n", "<leader>mfu", function()
 			-- Reloads the file to reflect the changes
-			vim.cmd("edit!")
-			vim.cmd("normal! zR") -- Unfold all headings
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.edit({ bang = true })
+			vim.cmd.normal({ "zR", bang = true }) -- Unfold all headings
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Unfold all headings level 2 or above")
 
 		-- HACK: Fold markdown headings in Neovim with a keymap
@@ -235,14 +235,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- zi by default toggles folding, but I don't need it lamw25wmal
 		bmap("zi", function()
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("silent update")
+			vim.cmd.update({ mods = { silent = true } })
 			-- Difference between normal and normal!
 			-- - `normal` executes the command and respects any mappings that might be defined.
 			-- - `normal!` executes the command in a "raw" mode, ignoring any mappings.
-			vim.cmd("normal gk")
+			vim.cmd.normal({ "gk" })
 			-- This is to fold the line under the cursor
-			vim.cmd("normal! za")
-			vim.cmd("normal! zz") -- center the cursor line on screen
+			vim.cmd.normal({ "za", bang = true })
+			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold the heading cursor currently on")
 
 		-- <CR> to toggle fold is safe globally (it only fires when on a fold line),
@@ -250,8 +250,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<CR>", function()
 			local line = vim.fn.line(".")
 			if vim.fn.foldlevel(line) > 0 and vim.fn.foldclosed(line) ~= -1 or vim.fn.foldlevel(line) > 0 then
-				vim.cmd("normal! za")
-				vim.cmd("normal! zz")
+				vim.cmd.normal({ "za", bang = true })
+				vim.cmd.normal({ "zz", bang = true })
 			else
 				-- Fall back to default behavior (moving down) if not on a fold
 				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
@@ -259,7 +259,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = buf, desc = "[P]Toggle fold" })
 	end, -- close FileType autocmd callback
 }) -- end vim.api.nvim_create_autocmd
-
 
 -------------------------------------------------------------------------------
 --                         End Folding section
