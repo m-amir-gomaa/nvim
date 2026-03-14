@@ -178,17 +178,27 @@ vim.keymap.set({ "n", "i" }, "<M-i>", function()
 			end
 			-- Detect the operating system
 			local is_mac = vim.fn.has("macunix") == 1
-			local is_linux = vim.fn.has("unix") == 1 and not is_mac
+			-- In Neovim, has("linux") checks for Linux specifically, while has("unix") includes macOS
+			local is_linux = vim.fn.has("linux") == 1
 			local clipboard_command = ""
+
 			if is_mac then
 				-- macOS command to get image from clipboard
 				clipboard_command =
 					[[osascript -e 'get the clipboard as «class PNGf»' | sed 's/«data PNGf//; s/»//' | xxd -r -p]]
 			elseif is_linux then
-				-- Linux command to get image from clipboard using xclip
+				-- Linux/NixOS Options for getting images from clipboard:
+				-- Option 1 (X11): `xclip`
+				--   Setup on NixOS: Add `xclip` to `environment.systemPackages`
+				--   Command: `xclip -selection clipboard -t image/png -o`
+				-- Option 2 (Wayland): `wl-clipboard`
+				--   Setup on NixOS: Add `wl-clipboard` to `environment.systemPackages`
+				--   Command: `wl-paste --type image/png`
+
+				-- We default to xclip here, but you should uncomment the wl-paste line
+				-- if you are running Wayland (like Hyprland or Sway on NixOS).
 				clipboard_command = [[xclip -selection clipboard -t image/png -o]]
-			-- Alternative for Wayland-based systems (uncomment if needed)
-			-- clipboard_command = [[wl-paste --type image/png]]
+				-- clipboard_command = [[wl-paste --type image/png]]
 			else
 				vim.notify("Unsupported operating system for clipboard image upload.", vim.log.levels.ERROR)
 				return
@@ -384,55 +394,76 @@ end, { desc = "[P]Paste image to Imgur" })
 -- HACK: Upload images from Neovim to Imgur
 -- https://youtu.be/Lzl_0SzbUBo
 --
--- Open image under cursor in Finder (macOS)
+-- Open image under cursor in File Manager (macOS / Linux)
 --
--- THIS ONLY WORKS IF YOU'RE NNNNNOOOOOOTTTTT USING ABSOLUTE PATHS,
--- BUT INSTEAD YOURE USING RELATIVE PATHS
---
+-- THIS ONLY WORKS IF YOU'RE USING RELATIVE PATHS
 -- If using absolute paths, use the default `gx` to open the image instead
 vim.keymap.set("n", "<leader>if", function()
 	local function get_image_path()
-		-- Get the current line
 		local line = vim.api.nvim_get_current_line()
-		-- Pattern to match image path in Markdown
 		local image_pattern = "%[.-%]%((.-)%)"
-		-- Extract relative image path
 		local _, _, image_path = string.find(line, image_pattern)
 		return image_path
 	end
-	-- Get the image path
+
 	local image_path = get_image_path()
 	if image_path then
-		-- Check if the image path starts with "http" or "https"
 		if string.sub(image_path, 1, 4) == "http" then
 			print("URL image, use 'gx' to open it in the default browser.")
 		else
-			-- Construct absolute image path
 			local current_file_path = vim.fn.expand("%:p:h")
 			local absolute_image_path = current_file_path .. "/" .. image_path
-			-- Open the containing folder in Finder or forklift and select the image file
-			-- Line below for finder
-			-- local command = "open -R " .. vim.fn.shellescape(absolute_image_path)
-			-- Line below for forklift
-			local command = "open -a ForkLift " .. vim.fn.shellescape(absolute_image_path)
-			local success = vim.fn.system(command)
-			if success == 0 then
-				print("Opened image in Finder: " .. absolute_image_path)
+
+			local is_mac = vim.fn.has("macunix") == 1
+			local is_linux = vim.fn.has("linux") == 1
+			local command = ""
+
+			if is_mac then
+				-- Options for macOS:
+				-- Option 1: Finder (Default file manager)
+				--   `open -R <path>` opens the folder and highlights the file
+				-- Option 2: ForkLift or other 3rd party managers
+				--   `open -a ForkLift <path>`
+				command = "open -a ForkLift " .. vim.fn.shellescape(absolute_image_path)
+			elseif is_linux then
+				-- Options for Linux/NixOS:
+				-- Option 1: `xdg-open [file]` Open the file in the default image viewer.
+				-- Option 2: `xdg-open [directory]` Opens the directory the image is in.
+				-- Option 3: Terminal file managers (e.g. `yazi`, `lf`, `nnn`)
+				-- Option 4: specific GUI managers (e.g. `nautilus --select <file>`, `dolphin --select <file>`)
+
+				-- Using xdg-open to open the directory (closest to macOS Finder behavior)
+				command = "xdg-open " .. vim.fn.shellescape(current_file_path)
 			else
-				print("Failed to open image in Finder: " .. absolute_image_path)
+				print("Unsupported OS")
+				return
+			end
+
+			local success = vim.fn.system(command)
+			if vim.v.shell_error == 0 then
+				print("Opened image path in File Manager: " .. absolute_image_path)
+			else
+				print("Failed to open image in File Manager: " .. absolute_image_path)
 			end
 		end
 	else
 		print("No image found under the cursor")
 	end
-end, { desc = "[P](macOS) Open image under cursor in Finder" })
+end, { desc = "[P]Open image under cursor in File Manager" })
 
 -- ############################################################################
 
 -- HACK: Upload images from Neovim to Imgur
 -- https://youtu.be/Lzl_0SzbUBo
 --
--- Delete image file under cursor using trash app (macOS)
+-- Delete image file under cursor using trash app (macOS / Linux)
+-- Linux Options before implementing:
+-- Option 1: `trash-cli` (provides `trash` command, same as macOS)
+--   Setup on NixOS: Add `trash-cli` to `environment.systemPackages`
+--   Benefit: Safe deletion, items go to the system trash.
+-- Option 2: `gio trash` (standard on GNOME / many desktop environments)
+-- Option 3: Standard `rm`
+--   Benefit: Always available, but destructive.
 vim.keymap.set("n", "<leader>id", function()
 	local function get_image_path()
 		local line = vim.api.nvim_get_current_line()
@@ -464,40 +495,45 @@ vim.keymap.set("n", "<leader>id", function()
 		)
 		return
 	end
-	if vim.fn.executable("trash") == 0 then
+
+	local is_mac = vim.fn.has("macunix") == 1
+	local is_linux = vim.fn.has("linux") == 1
+
+	-- We define the base trash command to check
+	local trash_cmd = "trash"
+
+	if vim.fn.executable(trash_cmd) == 0 then
+		local install_msg = "- In macOS run `brew install trash`\n"
+		if is_linux then
+			install_msg = "- In Linux/NixOS, install `trash-cli`\n"
+		end
 		vim.api.nvim_echo({
 			{ "- Trash utility not installed. Make sure to install it first\n", "ErrorMsg" },
-			{ "- In macOS run `brew install trash`\n", nil },
+			{ install_msg, nil },
 		}, false, {})
 		return
 	end
+
 	-- Cannot see the popup as the cursor is on top of the image name, so saving
 	-- its position, will move it to the top and then move it back
-	local current_pos = vim.api.nvim_win_get_cursor(0) -- Save cursor position
-	vim.api.nvim_win_set_cursor(0, { 1, 0 }) -- Move to top
+	local current_pos = vim.api.nvim_win_get_cursor(0)
+	vim.api.nvim_win_set_cursor(0, { 1, 0 })
 	vim.ui.select({ "yes", "no" }, { prompt = "Delete image file? " }, function(choice)
-		vim.api.nvim_win_set_cursor(0, current_pos) -- Move back to image line
+		vim.api.nvim_win_set_cursor(0, current_pos)
 		if choice == "yes" then
 			local success, _ = pcall(function()
-				vim.fn.system({ "trash", vim.fn.fnameescape(absolute_image_path) })
+				vim.fn.system({ trash_cmd, vim.fn.fnameescape(absolute_image_path) })
 			end)
-			-- Verify if file still exists after deletion attempt
+
 			if success and vim.fn.filereadable(absolute_image_path) == 1 then
 				-- Try with rm if trash deletion failed
-				-- Keep in mind that if deleting with `rm` the images won't go to the
-				-- macos trash app, they'll be gone
-				-- This is useful in case trying to delete imaes mounted in a network
-				-- drive, like for my blogpost lamw25wmal
-				--
-				-- Cannot see the popup as the cursor is on top of the image name, so saving
-				-- its position, will move it to the top and then move it back
-				current_pos = vim.api.nvim_win_get_cursor(0) -- Save cursor position
-				vim.api.nvim_win_set_cursor(0, { 1, 0 }) -- Move to top
+				current_pos = vim.api.nvim_win_get_cursor(0)
+				vim.api.nvim_win_set_cursor(0, { 1, 0 })
 				vim.ui.select(
 					{ "yes", "no" },
 					{ prompt = "Trash deletion failed. Try with rm command? " },
 					function(rm_choice)
-						vim.api.nvim_win_set_cursor(0, current_pos) -- Move back to image line
+						vim.api.nvim_win_set_cursor(0, current_pos)
 						if rm_choice == "yes" then
 							local rm_success, _ = pcall(function()
 								vim.fn.system({ "rm", vim.fn.fnameescape(absolute_image_path) })
@@ -507,7 +543,6 @@ vim.keymap.set("n", "<leader>id", function()
 									{ "Image file deleted from disk using rm:\n", "Normal" },
 									{ absolute_image_path, "Normal" },
 								}, false, {})
-								-- require("image").clear()
 								vim.cmd("edit!")
 								vim.cmd("normal! dd")
 							else
@@ -524,7 +559,6 @@ vim.keymap.set("n", "<leader>id", function()
 					{ "Image file deleted from disk:\n", "Normal" },
 					{ absolute_image_path, "Normal" },
 				}, false, {})
-				-- require("image").clear()
 				vim.cmd("edit!")
 				vim.cmd("normal! dd")
 			else
@@ -537,7 +571,7 @@ vim.keymap.set("n", "<leader>id", function()
 			vim.api.nvim_echo({ { "Image deletion canceled.", "Normal" } }, false, {})
 		end
 	end)
-end, { desc = "[P](macOS) Delete image file under cursor" })
+end, { desc = "[P]Delete image file under cursor" })
 
 -- ############################################################################
 
