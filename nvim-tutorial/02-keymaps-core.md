@@ -7,6 +7,7 @@
 ## Philosophy of your keymap layout
 
 Your keymaps follow a clear pattern you've built over time:
+
 - `<leader>` for commands that don't need to be instant
 - Single keys / motions for things used constantly
 - `<M-x>` (Alt) for insert-mode accessible commands
@@ -28,12 +29,13 @@ and without tmux navigator). The `<C-hjkl>` pattern mirrors your normal hjkl mov
 and makes split navigation feel like extended cursor movement.
 
 > **All the `<C-w>` commands you probably don't use:**
+>
 > - `<C-w>=` — equalise all split sizes
 > - `<C-w>_` / `<C-w>|` — maximise height / width
 > - `<C-w>r` — rotate splits
 > - `<C-w>x` — swap two splits
 > - `<C-w>T` — move current split to a new tab
-> - `<C-w>o` — close every split *except* the current one
+> - `<C-w>o` — close every split _except_ the current one
 
 ---
 
@@ -68,7 +70,7 @@ map('n', 'J', 'mzJ`z')
 ```
 
 The built-in `J` joins the next line onto the current one, but moves your cursor to the
-join point. `mzJ\`z` saves cursor position to mark `z`, joins, then restores. Your cursor
+join point. `mzJ\`z`saves cursor position to mark`z`, joins, then restores. Your cursor
 stays in place. Invisible improvement you'll only notice when it's missing.
 
 ---
@@ -159,7 +161,7 @@ It's populated by: grep results, LSP references, compiler errors, `gitsigns.diff
 and anything you send to it with `:cexpr` or `:caddexpr`.
 
 > **Practical pattern:** Run `:Telescope live_grep`, find usages of a function, then
-> press `<C-q>` to send *all results* to the quickfix list. Now `]q`/`[q` navigates
+> press `<C-q>` to send _all results_ to the quickfix list. Now `]q`/`[q` navigates
 > every usage without re-running the search.
 
 ---
@@ -194,6 +196,7 @@ end)
 ```
 
 Three behaviours in one:
+
 1. `[ ]` present → marks as done `[x]`
 2. `[x]` present → unchecks back to `[ ]`
 3. Neither → wraps the line in `- [x] ` format (adds a completed task)
@@ -243,7 +246,7 @@ vim.keymap.set('n', 'yd', function() ... end,
   { desc = '[P]Yank line and diagnostic to system clipboard' })
 ```
 
-Found in `extra_keybindings_linkarzu.lua`. Copies the current line *plus* all diagnostic
+Found in `extra_keybindings_linkarzu.lua`. Copies the current line _plus_ all diagnostic
 messages on it to your system clipboard — formatted nicely for pasting into a bug report
 or asking an AI assistant for help. This is a genuinely useful convenience.
 
