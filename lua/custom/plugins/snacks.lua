@@ -27,10 +27,10 @@ return {
 		},
 
 		-- Highlight all occurrences of the word under cursor
-		words = { enabled = true },
+		words = { enabled = false },
 
 		-- Smooth scrolling
-		scroll = { enabled = true },
+		scroll = { enabled = false },
 
 		-- Indent guides (integrates with your indent-blankline setup)
 		indent = { enabled = false }, -- using indent-blankline; enable if you prefer snacks indent

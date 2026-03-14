@@ -16,8 +16,8 @@ you stage, reset, or navigate changes without leaving Neovim.
 ## Navigation
 
 ```lua
-map('n', ']c', ...)   -- Jump to next git change
-map('n', '[c', ...)   -- Jump to previous git change
+map('n', ']h', ...)   -- Jump to next git hunk
+map('n', '[h', ...)   -- Jump to previous git hunk
 ```
 
 These jump between *hunks* — contiguous blocks of changes. The callback is smart:
@@ -85,7 +85,7 @@ With `'@'` as argument, diffs against the last commit (HEAD) instead.
 The power is hunk-level staging. Instead of `git add file.go` (which stages everything),
 you can:
 1. Write several unrelated changes in one file
-2. Navigate to the first logical change with `]c`/`[c`
+2. Navigate to the first logical change with `]h`/`[h`
 3. Stage just that hunk with `<leader>hs`
 4. Repeat for related hunks
 5. Commit — only those staged hunks go into the commit

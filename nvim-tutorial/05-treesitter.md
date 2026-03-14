@@ -106,6 +106,8 @@ goto_previous_start = {
 `]f` / `[f` — Jump to the start of the next/previous function in the file.
 `]c` / `[c` — Jump to the next/previous class.
 
+**Note on Priority:** In this configuration, Treesitter class jumps (`]c`) take priority over Git hunk jumps (which have been moved to `]h`).
+
 These work with `set_jumps = true`, meaning they add to the jumplist. Press `<C-o>` to
 go back to where you were.
 
