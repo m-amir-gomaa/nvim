@@ -63,6 +63,7 @@ return {
 			{ "<leader>mh", group = "[M]arkdown [H]eading" },
 			{ "<leader>ml", group = "[M]arkdown [L]inks" },
 			{ "<leader>ms", group = "[M]arkdown [S]pell" },
+			{ "<leader>mt", group = "[M]arkdown [T]OC" },
 			{ "[", group = "[[]Prev" },
 			{ "]", group = "[]]Next" },
 			{ "gs", group = "[G]lobal [S]urround" },
