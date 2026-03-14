@@ -92,24 +92,16 @@ doSomething(firstArg, secondArg, thirdArg)
 
 ## Movement textobjects
 
-```lua
-goto_next_start = {
-  [']f'] = '@function.outer',
-  [']c'] = '@class.outer',
-},
-goto_previous_start = {
-  ['[f'] = '@function.outer',
-  ['[c'] = '@class.outer',
-},
-```
+These provide high-speed navigation across your code's structure.
 
-`]f` / `[f` — Jump to the start of the next/previous function in the file.
-`]c` / `[c` — Jump to the next/previous class.
+| Key | Action |
+|-----|--------|
+| `]f` / `[f` | Jump to the start of the next/previous function |
+| `]c` / `[c` | Jump to the start of the next/previous class |
 
-**Note on Priority:** In this configuration, Treesitter class jumps (`]c`) take priority over Git hunk jumps (which have been moved to `]h`).
+**Note on Conflict Resolution:** In this configuration, these are explicitly mapped to ensure they take priority over other plugins (like `mini.bracketed`) and follow the most intuitive behavior. Pressing `]f` will move you directly to the next function without any prefixes like `g`.
 
-These work with `set_jumps = true`, meaning they add to the jumplist. Press `<C-o>` to
-go back to where you were.
+These work with `set_jumps = true`, meaning they add to the jumplist. Press `<C-o>` to go back to where you were.
 
 ---
 

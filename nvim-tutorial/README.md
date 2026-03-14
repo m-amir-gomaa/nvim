@@ -22,8 +22,8 @@ built, including the parts that feel unexplored.
 | [11-markdown-workflow.md](11-markdown-workflow.md) | The full markdown system — rendering, folding, tasks, images |
 | [12-rust-workflow.md](12-rust-workflow.md) | rustaceanvim, hover actions, testables |
 | [13-ui-appearance.md](13-ui-appearance.md) | Colorscheme, snacks modules, mini.nvim, which-key, indent |
-| [14-editing-tools.md](14-editing-tools.md) | flash.nvim, visual-multi, autopairs, outline, sleuth |
-| [15-16-search-diagnostics.md](15-16-search-diagnostics.md) | grug-far, todo-comments, trouble, built-in diagnostic navigation |
+| [14-editing-tools.md](14-editing-tools.md) | visual-multi, autopairs, outline, sleuth |
+| [15-16-search-diagnostics.md](15-16-search-diagnostics.md) | grug-far, trouble, built-in diagnostic navigation |
 | [17-nix-tool-management.md](17-nix-tool-management.md) | Managing LSPs, formatters, and debuggers via `nvim.nix` & rebuilds |
 | [18-implementation-deep-dives.md](18-implementation-deep-dives.md) | How your complex Lua actually works, line by line |
 | [19-terminal.md](19-terminal.md) | Floating terminal — toggle, terminal mode, configuration |
@@ -44,7 +44,7 @@ built, including the parts that feel unexplored.
 → `03-lsp.md`, `05-treesitter.md`, `06-telescope.md` in that order
 
 **"I want to understand what's new after the config fixes"**
-→ New plugins: `flash.nvim` (§14), `trouble.nvim` (§15-16), `grug-far` (§15-16),
+→ New plugins: `trouble.nvim` (§15-16), `grug-far` (§15-16),
   `treesitter-context` + `textobjects` (§05), `friendly-snippets` (§04), expanded
   `snacks.nvim` modules like **Image (Kitty Protocol)**, **Mermaid/UML**, and **LaTeX Math Rendering** (§11/13)
 
@@ -55,5 +55,4 @@ built, including the parts that feel unexplored.
 
 ## One real thing to try right now
 
-Open any code file and press `s`, then type two characters of any visible word.
-That's `flash.nvim`. If it feels natural, you'll stop counting `wwwww` forever.
+Open any code file and press `]f` to jump to the next function, or `]h` to jump to the next git hunk.

@@ -146,18 +146,10 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>su` | Replace word under cursor (global) |
 | `<leader>sU` | Replace with UPPERCASE             |
 | `<leader>sL` | Replace with lowercase             |
+| `<leader>sp` | Swap parameter next                |
+| `<leader>sP` | Swap parameter prev                |
 
-## Flash
-
-| Key     | Action                   |
-| ------- | ------------------------ |
-| `s`     | Flash jump               |
-| `S`     | Flash treesitter select  |
-| `r`     | Flash remote operation   |
-| `R`     | Flash treesitter search  |
-| `<C-s>` | Toggle flash in / search |
-
-## Treesitter textobjects
+## Treesitter Navigation & Textobjects
 
 | Key          | Action                     |
 | ------------ | -------------------------- |
@@ -166,9 +158,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `aa` / `ia`  | Around/inside parameter    |
 | `ab` / `ib`  | Around/inside block        |
 | `]f` / `[f`  | Next/prev function         |
-| `]c` / `[c`  | Next/prev class (Priority) |
-| `<leader>sp` | Swap parameter next        |
-| `<leader>sP` | Swap parameter prev        |
+| `]c` / `[c`  | Next/prev class            |
 | `[x`         | Jump to treesitter context |
 
 ## mini.surround
