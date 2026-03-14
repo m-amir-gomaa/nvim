@@ -14,7 +14,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `J` (normal) | Join lines (cursor stays)        |
 | `n` / `N`    | Next/prev search match (centred) |
 | `<Esc>`      | Clear search highlight           |
-| `<CR>`       | Toggle fold at cursor            |
+| `<CR>`       | Toggle Linkarzu-fold (Markdown)  |
 
 ## Windows & Tabs
 
@@ -63,6 +63,18 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>ca` | Code action                            |
 | `<leader>th` | Toggle inlay hints                     |
 | `[d` / `]d`  | Prev / next diagnostic                 |
+| `;`          | Telescope cmdline                      |
+
+## Completion (blink.cmp)
+
+| Key      | Action                          |
+| -------- | ------------------------------- |
+| `<C-j>`  | Select next item                |
+| `<C-k>`  | Select previous item            |
+| `<C-l>`  | Toggle signature help           |
+| `<CR>`   | Accept completion               |
+| `<C-e>`  | Close completion menu           |
+| `<C-spc>`| Manually open menu / docs       |
 
 ## Git (gitsigns)
 

@@ -11,7 +11,7 @@ On NixOS, your editor's tools (LSPs, Formatters, Debuggers) are not "installed" 
 The "Brain" of your toolchain is in **`nvim.nix`**. 
 
 > [!NOTE]
-> For maximum convenience, `nvim.nix` is **hard-linked** between `~/NixOSenv/` and `~/nvimConfig/`. Changes made in your Neovim workspace are instantly reflected in your system configuration.
+> For maximum convenience, `nvim.nix` is **hard-linked** between `~/NixOSenv/` and `~/nvim/`. Changes made in your Neovim workspace are instantly reflected in your system configuration.
 
 Inside `extraPackages`, you list every binary Neovim needs.
 ```nix
@@ -30,6 +30,7 @@ extraPackages = with pkgs; [
   rust-analyzer                            # Rust
   taplo                                    # TOML
   markdown-oxide                           # Obsidian-style backlinks
+  harper                                   # Prose grammar checker
 
   # ── Formatters ──────────────────────────────────────────────────────
   stylua gofumpt shfmt black isort ruff

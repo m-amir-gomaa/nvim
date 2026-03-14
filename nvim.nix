@@ -21,8 +21,8 @@
 #
 # NEOVIM CONFIG LOCATION:
 #   xdg.configFile."nvim".source = mkOutOfStoreSymlink …
-#   This creates ~/.config/nvim → ~/NixOSenv/dotfiles/nvim (a live symlink).
-#   Changes to Lua config files inside dotfiles/nvim/ are picked up immediately
+#   This creates ~/.config/nvim → ~/nvim (a live symlink into the standalone nvim repo).
+#   Changes to Lua config files inside ~/nvim/ are picked up immediately
 #   without a Nix rebuild — only changes to THIS file (adding/removing packages)
 #   require a rebuild.
 # ────────────────────────────────────────────────────────────────────────────
@@ -53,6 +53,7 @@
       rust-analyzer # Rust
       taplo # TOML
       markdown-oxide # Markdown LSP with Obsidian-style backlinks
+      harper # Prose grammar checker
 
       # ── Formatters ───────────────────────────────────────────────────────
       # conform.nvim (or null-ls) calls these directly; they are NOT plugins.
@@ -101,9 +102,9 @@
     ];
   };
 
-  # Point ~/.config/nvim at the live dotfiles directory.
+  # Point ~/.config/nvim at the live standalone nvim repo.
   # mkOutOfStoreSymlink is used (not a plain source copy) so Lua edits are
   # picked up without a rebuild.
   xdg.configFile."nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/qwerty/NixOSenv/dotfiles/nvim";
+    config.lib.file.mkOutOfStoreSymlink "/home/qwerty/nvim";
 }

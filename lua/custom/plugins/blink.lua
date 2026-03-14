@@ -31,10 +31,13 @@ return {
 		keymap = {
 			preset = "default",
 			["<CR>"] = { "accept", "fallback" },
-			["<C-n>"] = { "select_next", "fallback" },
-			["<C-b>"] = { "select_prev", "fallback" },
+			["<C-j>"] = { "select_next", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
+			["<C-l>"] = { "show_signature", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
+			["<C-p>"] = { "fallback" },
+			["<C-b>"] = { "fallback" },
 		},
 
 		appearance = {

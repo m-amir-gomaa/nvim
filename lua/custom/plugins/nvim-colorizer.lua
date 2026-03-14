@@ -1,6 +1,6 @@
 return {
 	{
-		"norcalli/nvim-colorizer.lua",
+		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup({
 				"*", -- Highlight ALL files (includes Lua by default)
