@@ -107,23 +107,24 @@ Extends Vim's built-in `i`/`a` textobjects with smarter versions:
 - `in)` — inside the *next* `(...)` after cursor (not the one you're in)
 - `il` / `al` — inside/around last bracket/quote
 
-### mini.surround
+### vim-surround
 
 ```lua
-require('mini.surround').setup()
+require('vim-surround') -- Installed via tpope/vim-surround
 ```
 
 Adds, deletes, and changes surrounding pairs. Default keymaps:
 
 | Keymap | Action | Example |
 |--------|--------|---------|
-| `gsa{motion}{char}` | Add surround | `gsaiw"` → adds `"` around word |
-| `gsd{char}` | Delete surround | `gsd"` → removes `"` |
-| `gsr{old}{new}` | Replace surround | `gsr"'` → changes `"` to `'` |
+| `ys{motion}{char}` | Add surround | `ysiw"` → adds `"` around word |
+| `ds{char}` | Delete surround | `ds"` → removes `"` |
+| `cs{old}{new}` | Replace surround | `cs"'` → changes `"` to `'` |
+| `S{char}` | Visual surround | Select text, `S"` → adds `"` |
 
 Your markdown keymaps use this:
-- `gss` (normal) → `gsaiw\`` — surrounds current word with backticks (inline code)
-- `gss` (visual) → `gsa\`` — surrounds selection with backtick
+- `gss` (normal) → `ysiw\`` — surrounds current word with backticks (inline code)
+- `gss` (visual) → `S\`` — surrounds selection with backtick
 
 ### mini.statusline
 

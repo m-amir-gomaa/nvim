@@ -161,13 +161,14 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `]c` / `[c`  | Next/prev class            |
 | `[x`         | Jump to treesitter context |
 
-## mini.surround
+## vim-surround
 
 | Key                 | Action                            |
 | ------------------- | --------------------------------- |
-| `gsa{motion}{char}` | Add surround                      |
-| `gsd{char}`         | Delete surround                   |
-| `gsr{old}{new}`     | Replace surround                  |
+| `ys{motion}{char}`  | Add surround                      |
+| `ds{char}`          | Delete surround                   |
+| `cs{old}{new}`      | Replace surround                  |
+| `S{char}` (visual)  | Surround selection                |
 | `gss` (normal)      | Surround word with backticks      |
 | `gss` (visual)      | Surround selection with backticks |
 | `gsu`               | Surround URL with backticks       |
