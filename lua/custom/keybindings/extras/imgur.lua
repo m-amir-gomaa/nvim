@@ -188,17 +188,9 @@ vim.keymap.set({ "n", "i" }, "<M-i>", function()
 					[[osascript -e 'get the clipboard as «class PNGf»' | sed 's/«data PNGf//; s/»//' | xxd -r -p]]
 			elseif is_linux then
 				-- Linux/NixOS Options for getting images from clipboard:
-				-- Option 1 (X11): `xclip`
-				--   Setup on NixOS: Add `xclip` to `environment.systemPackages`
-				--   Command: `xclip -selection clipboard -t image/png -o`
-				-- Option 2 (Wayland): `wl-clipboard`
-				--   Setup on NixOS: Add `wl-clipboard` to `environment.systemPackages`
-				--   Command: `wl-paste --type image/png`
-
-				-- We default to xclip here, but you should uncomment the wl-paste line
-				-- if you are running Wayland (like Hyprland or Sway on NixOS).
-				clipboard_command = [[xclip -selection clipboard -t image/png -o]]
-				-- clipboard_command = [[wl-paste --type image/png]]
+				-- We are using wl-paste here because you are running Hyprland (Wayland).
+				-- clipboard_command = [[xclip -selection clipboard -t image/png -o]]
+				clipboard_command = [[wl-paste --type image/png]]
 			else
 				vim.notify("Unsupported operating system for clipboard image upload.", vim.log.levels.ERROR)
 				return
@@ -496,82 +488,25 @@ vim.keymap.set("n", "<leader>id", function()
 		return
 	end
 
-	local is_mac = vim.fn.has("macunix") == 1
-	local is_linux = vim.fn.has("linux") == 1
-
-	-- We define the base trash command to check
-	local trash_cmd = "trash"
-
-	if vim.fn.executable(trash_cmd) == 0 then
-		local install_msg = "- In macOS run `brew install trash`\n"
-		if is_linux then
-			install_msg = "- In Linux/NixOS, install `trash-cli`\n"
-		end
-		vim.api.nvim_echo({
-			{ "- Trash utility not installed. Make sure to install it first\n", "ErrorMsg" },
-			{ install_msg, nil },
-		}, false, {})
-		return
-	end
-
-	-- Cannot see the popup as the cursor is on top of the image name, so saving
-	-- its position, will move it to the top and then move it back
-	local current_pos = vim.api.nvim_win_get_cursor(0)
-	vim.api.nvim_win_set_cursor(0, { 1, 0 })
-	vim.ui.select({ "yes", "no" }, { prompt = "Delete image file? " }, function(choice)
-		vim.api.nvim_win_set_cursor(0, current_pos)
-		if choice == "yes" then
-			local success, _ = pcall(function()
-				vim.fn.system({ trash_cmd, vim.fn.fnameescape(absolute_image_path) })
-			end)
-
-			if success and vim.fn.filereadable(absolute_image_path) == 1 then
-				-- Try with rm if trash deletion failed
-				current_pos = vim.api.nvim_win_get_cursor(0)
-				vim.api.nvim_win_set_cursor(0, { 1, 0 })
-				vim.ui.select(
-					{ "yes", "no" },
-					{ prompt = "Trash deletion failed. Try with rm command? " },
-					function(rm_choice)
-						vim.api.nvim_win_set_cursor(0, current_pos)
-						if rm_choice == "yes" then
-							local rm_success, _ = pcall(function()
-								vim.fn.system({ "rm", vim.fn.fnameescape(absolute_image_path) })
-							end)
-							if rm_success and vim.fn.filereadable(absolute_image_path) == 0 then
-								vim.api.nvim_echo({
-									{ "Image file deleted from disk using rm:\n", "Normal" },
-									{ absolute_image_path, "Normal" },
-								}, false, {})
-								vim.cmd("edit!")
-								vim.cmd("normal! dd")
-							else
-								vim.api.nvim_echo({
-									{ "Failed to delete image file with rm:\n", "ErrorMsg" },
-									{ absolute_image_path, "ErrorMsg" },
-								}, false, {})
-							end
-						end
-					end
-				)
-			elseif success and vim.fn.filereadable(absolute_image_path) == 0 then
-				vim.api.nvim_echo({
-					{ "Image file deleted from disk:\n", "Normal" },
-					{ absolute_image_path, "Normal" },
-				}, false, {})
-				vim.cmd("edit!")
-				vim.cmd("normal! dd")
-			else
-				vim.api.nvim_echo({
-					{ "Failed to delete image file:\n", "ErrorMsg" },
-					{ absolute_image_path, "ErrorMsg" },
-				}, false, {})
-			end
-		else
-			vim.api.nvim_echo({ { "Image deletion canceled.", "Normal" } }, false, {})
-		end
+	-- Since you requested no confirmation and a hard deletion we use rm -rf directly
+	local success, _ = pcall(function()
+		vim.fn.system({ "rm", "-rf", vim.fn.fnameescape(absolute_image_path) })
 	end)
-end, { desc = "[P]Delete image file under cursor" })
+
+	if success and vim.fn.filereadable(absolute_image_path) == 0 then
+		vim.api.nvim_echo({
+			{ "Image file definitively deleted from disk using rm -rf:\n", "Normal" },
+			{ absolute_image_path, "Normal" },
+		}, false, {})
+		vim.cmd("edit!")
+		vim.cmd("normal! dd")
+	else
+		vim.api.nvim_echo({
+			{ "Failed to delete image file:\n", "ErrorMsg" },
+			{ absolute_image_path, "ErrorMsg" },
+		}, false, {})
+	end
+end, { desc = "[P]Delete image file under cursor (no confirmation)" })
 
 -- ############################################################################
 
