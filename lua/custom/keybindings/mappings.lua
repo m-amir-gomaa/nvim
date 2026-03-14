@@ -57,9 +57,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rust",
 	callback = function(ev)
 		local opts = { silent = true, buffer = ev.buf }
-		map("n", "<leader>cr", function()
-			vim.cmd.RustLsp("codeAction")
-		end, vim.tbl_extend("force", opts, { desc = "Rust code action" }))
 		map("n", "K", function()
 			vim.cmd.RustLsp({ "hover", "actions" })
 		end, vim.tbl_extend("force", opts, { desc = "Rust hover actions" }))

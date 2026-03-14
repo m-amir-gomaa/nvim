@@ -11,9 +11,10 @@ return {
 			doc = {
 				inline = true,
 				float = true,
-				-- Removing max_width/max_height constraints to ensure large diagrams render
-				-- Ensuring diagrams render even when cursor is away
-				only_render_at_cursor = false,
+				max_width = 80,
+				max_height = 40,
+				-- Re-enabling for performance: Mermaid is too slow to render everything at once
+				only_render_at_cursor = true,
 			},
 			formats = { "png", "jpg", "jpeg", "gif", "webp", "svg" },
 			math = { enabled = true },
