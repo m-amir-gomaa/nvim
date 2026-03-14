@@ -25,6 +25,8 @@ vim.o.inccommand = "split"
 vim.o.cursorline = true
 vim.o.scrolloff = 10
 vim.o.confirm = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "manual"
 
 -- Sync clipboard after UI loads to avoid startup delay
 vim.schedule(function()
@@ -56,6 +58,33 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
 		vim.hl.on_yank()
+	end,
+})
+
+-- Restore cursor position when opening a file
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "Go to last location when opening a buffer",
+	callback = function(event)
+		local exclude = { "gitcommit" }
+		local buf = event.buf
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+			return
+		end
+		vim.b[buf].lazyvim_last_loc = true
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
+-- Handle swap file conflicts automatically
+-- This prevents the 'Vim:E325: ATTENTION' error from blocking async operations
+vim.api.nvim_create_autocmd("SwapExists", {
+	desc = "Handle swap file conflicts automatically",
+	callback = function()
+		vim.v.swapchoice = "e" -- Edit anyway
 	end,
 })
 

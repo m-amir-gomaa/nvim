@@ -66,10 +66,8 @@ shows raw markdown — so you can see exactly what you're typing.
 
 ---
 
-## Folding (`folding_section.lua`)
-
-Your folding system is custom-built using treesitter-aware fold expressions. For markdown,
-headings define fold boundaries.
+Your folding system is custom-built for speed and aesthetics, inspired by **Linkarzu**.
+For markdown, headings define fold boundaries.
 
 ### Fold keymaps (markdown/typst only)
 
@@ -81,7 +79,13 @@ headings define fold boundaries.
 | `z;` | Fold all H4 and below |
 | `zu` | Unfold everything |
 | `zi` | Jump to heading above and fold it |
-| `<CR>` | Toggle fold at cursor (any filetype) |
+| `<CR>` | Toggle fold at cursor (Markdown/Typst only) |
+
+### Linkarzu Style Clean Visuals
+Your folds are configured to look clean:
+- **No prefix**: The bulky `+---` prefix is removed.
+- **No trailing dashes**: The fill characters are cleared.
+- **Table of Contents**: When you open a file, all headings start folded, giving you an immediate, clean navigation view.
 
 These are **buffer-local** — they only apply in markdown/typst files and don't override
 Vim's built-in fold motions elsewhere.

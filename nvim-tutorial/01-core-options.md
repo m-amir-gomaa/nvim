@@ -89,6 +89,17 @@ This means you can close a file, re-open it tomorrow, and still undo. Combined w
 ---
 
 ```lua
+-- Restore cursor position when opening a file
+vim.api.nvim_create_autocmd("BufReadPost", { ... })
+```
+
+**Cursor Persistence.** This ensures that when you reopen a file, you're placed exactly
+where you left off. It uses the `"` mark (last known position) and applies it
+globally, unless the filetype is explicitly excluded (like `gitcommit`).
+
+---
+
+```lua
 vim.o.ignorecase = true
 vim.o.smartcase = true
 ```

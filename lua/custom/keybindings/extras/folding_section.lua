@@ -44,7 +44,9 @@ end
 local function set_markdown_folding()
 	vim.opt_local.foldmethod = "expr"
 	vim.opt_local.foldexpr = "v:lua.markdown_foldexpr()"
-	vim.opt_local.foldlevel = 99
+	vim.opt_local.foldlevel = 1
+	vim.opt_local.foldtext = ""
+	vim.opt_local.fillchars:append({ fold = " " })
 
 	-- Detect frontmatter closing line
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -66,7 +68,9 @@ end
 local function set_typst_folding()
 	vim.opt_local.foldmethod = "expr"
 	vim.opt_local.foldexpr = "v:lua.typst_foldexpr()"
-	vim.opt_local.foldlevel = 99
+	vim.opt_local.foldlevel = 1
+	vim.opt_local.foldtext = ""
+	vim.opt_local.fillchars:append({ fold = " " })
 end
 
 -- Use autocommand to apply only to markdown files
@@ -240,20 +244,22 @@ vim.api.nvim_create_autocmd("FileType", {
 			vim.cmd("normal! za")
 			vim.cmd("normal! zz") -- center the cursor line on screen
 		end, "[P]Fold the heading cursor currently on")
+
+		-- <CR> to toggle fold is safe globally (it only fires when on a fold line),
+		-- but the user wants it to only work in markdown files
+		vim.keymap.set("n", "<CR>", function()
+			local line = vim.fn.line(".")
+			if vim.fn.foldlevel(line) > 0 and vim.fn.foldclosed(line) ~= -1 or vim.fn.foldlevel(line) > 0 then
+				vim.cmd("normal! za")
+				vim.cmd("normal! zz")
+			else
+				-- Fall back to default behavior (moving down) if not on a fold
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+			end
+		end, { buffer = buf, desc = "[P]Toggle fold" })
 	end, -- close FileType autocmd callback
 }) -- end vim.api.nvim_create_autocmd
 
--- <CR> to toggle fold is safe globally (it only fires when on a fold line)
-vim.keymap.set("n", "<CR>", function()
-	local line = vim.fn.line(".")
-	local foldlevel = vim.fn.foldlevel(line)
-	if foldlevel == 0 then
-		vim.notify("No fold found", vim.log.levels.INFO)
-	else
-		vim.cmd("normal! za")
-		vim.cmd("normal! zz")
-	end
-end, { desc = "[P]Toggle fold" })
 
 -------------------------------------------------------------------------------
 --                         End Folding section

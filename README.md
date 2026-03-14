@@ -13,6 +13,9 @@ A personalized Neovim configuration.
   - **UML**: Dedicated PlantUML viewer using `weirongxu/plantuml-previewer.vim`.
   - **Images**: Professional image pasting from clipboard via `img-clip.nvim`.
   - **Math**: LaTeX/Math support via `snacks.nvim`.
+- **Navigation**:
+  - **Cursor Persistence**: Reopens files exactly where you left them.
+  - **Folding**: Authentic Linkarzu-style folding for Markdown (clean visual headers, `<CR>` to toggle).
 
 ## Structure
 - `init.lua`: Main entry point and core settings.
@@ -23,13 +26,15 @@ A personalized Neovim configuration.
 ## Development Workflow
 This configuration is tightly integrated with **NixOS**.
 - **Tool Management**: Add LSPs/binaries to `nvim.nix`.
-- **Sync**: `nvim.nix` is hard-linked between `~/nvimConfig` and `~/NixOSenv` for seamless editing and pure builds.
+- **Sync**: `nvim.nix` is hard-linked between `~/nvim` and `~/NixOSenv` for seamless editing and immediate availability in both repositories.
 - **Rebuild**: Apply changes with the `nr` command.
 
 ## Keybindings (New)
 - `<leader>dv`: [D]iagram [V]iew (Open browser preview for PlantUML)
 - `<leader>ds`: [D]iagram [S]ave (Save diagram as image)
 - `<leader>ip`: [I]mage [P]aste (Paste and save image from clipboard)
+- `<C-j>`/`<C-k>`: Completion navigation (prevents `tmux`/`telescope` conflicts)
+- `<CR>`: Toggle fold (in Markdown/Typst)
 
 ## Prerequisites
 - Neovim (latest stable or nightly)

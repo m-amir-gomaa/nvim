@@ -43,8 +43,9 @@ consistency in naming.
 
 ```lua
 ['<CR>']  = { 'accept', 'fallback' }   -- confirm completion
-['<C-n>'] = { 'select_next', 'fallback' }
-['<C-b>'] = { 'select_prev', 'fallback' }   -- note: not C-p, avoids conflict
+['<C-j>'] = { 'select_next', 'fallback' }
+['<C-k>'] = { 'select_prev', 'fallback' }   -- avoids C-p conflict (finder) and C-b conflict (tmux)
+['<C-l>'] = { 'show_signature', 'fallback' }
 ['<Up>']  = { 'select_prev', 'fallback' }
 ['<Down>']= { 'select_next', 'fallback' }
 ```
@@ -56,7 +57,7 @@ the completion menu isn't open.
 From the default `preset`:
 - **`<C-space>`** — Force-open the completion menu, or open documentation if already open
 - **`<C-e>`** — Close the completion menu without accepting
-- **`<C-k>`** — Toggle signature help (parameter hints while calling a function)
+- **`<C-l>`** — Toggle signature help (parameter hints while calling a function)
 - **`<Tab>` / `<S-Tab>`** — Move between snippet expansion points (tabstops)
 
 ---

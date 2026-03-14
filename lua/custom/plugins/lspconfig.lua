@@ -99,6 +99,9 @@ return {
 			-- Adding it here would cause double-attachment.
 			marksman = {},
 			markdown_oxide = {},
+			harper_ls = {
+				filetypes = { "markdown" },
+			},
 
 			lua_ls = {
 				settings = {
