@@ -80,7 +80,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 
 | Key          | Action                   |
 | ------------ | ------------------------ |
-| `]c` / `[c`  | Next / prev hunk         |
+| `]h` / `[h`  | Next / prev hunk         |
 | `<leader>hs` | Stage hunk               |
 | `<leader>hr` | Reset hunk               |
 | `<leader>hS` | Stage buffer             |
@@ -166,7 +166,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `aa` / `ia`  | Around/inside parameter    |
 | `ab` / `ib`  | Around/inside block        |
 | `]f` / `[f`  | Next/prev function         |
-| `]c` / `[c`  | Next/prev class            |
+| `]c` / `[c`  | Next/prev class (Priority) |
 | `<leader>sp` | Swap parameter next        |
 | `<leader>sP` | Swap parameter prev        |
 | `[x`         | Jump to treesitter context |

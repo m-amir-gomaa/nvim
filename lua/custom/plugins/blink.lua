@@ -51,7 +51,7 @@ return {
 					auto_insert = true,
 				},
 			},
-			documentation = { auto_show = false, auto_show_delay_ms = 500 },
+			documentation = { auto_show = true, auto_show_delay_ms = 500 },
 		},
 
 		sources = {
