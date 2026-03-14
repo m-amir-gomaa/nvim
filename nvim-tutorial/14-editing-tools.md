@@ -1,62 +1,7 @@
 # 14 — Editing & Motion Tools
 
-**Files:** `lua/custom/plugins/flash.lua`, `lua/custom/plugins/vim-visual-multi.lua`,
-`lua/kickstart/plugins/autopairs.lua`, `lua/custom/plugins/outline.lua`,
-`lua/custom/plugins/sleuth.lua`
-
----
-
-## flash.nvim — jump anywhere
-
-Flash gives you fast jump motions using labelled search. Instead of counting how many
-`w` presses get you to a word, or typing `f` + character + `;;;;;`, you type two
-characters and get a label on every match.
-
-### Core motion: `s`
-
-In normal mode, press `s` then type two characters. Every position on screen that
-starts with those two characters gets a label (a single letter or letter pair). Type
-the label to jump there.
-
-Example: Press `s`, type `fn`. Every `fn` on screen gets a label. Type the label for
-the function call you want. One jump, no counting.
-
-### Treesitter select: `S`
-
-`S` enters a mode where flash highlights *treesitter nodes*. Type characters to filter,
-then select a node. The selection is syntactically aware — you can select entire
-function bodies, argument lists, or expressions by filtering to where they start.
-
-In visual and operator-pending mode, this is powerful:
-- `vS` + select a function node → visually select that entire function
-- `dS` + select a block node → delete that entire block
-
-### Remote operations: `r`
-
-In operator-pending mode, `r` means "perform this operation on a remote location."
-
-- `yr{flash target}` — yank text at a remote location (without moving cursor)
-- `dr{flash target}` — delete text at a remote location
-- `cr{flash target}` — change text at a remote location
-
-Example: You want to yank a function defined 50 lines down without navigating there.
-Press `yr`, use flash to label the target, and the text is in your clipboard. Cursor
-never moved.
-
-### Treesitter search across buffers: `R`
-
-In visual/operator-pending mode, `R` opens a search that spans all visible windows
-and lets you select treesitter nodes anywhere on screen.
-
-### Enhanced `f`/`F`/`t`/`T`
-
-```lua
-modes = { char = { enabled = true, jump_labels = true } }
-```
-
-The built-in `f` and `t` motions gain flash labels on repeat presses. When you press
-`f` + character and there are multiple matches, they get labelled. Type the label to
-jump directly.
+**Files:** `lua/custom/plugins/vim-visual-multi.lua`, `lua/kickstart/plugins/autopairs.lua`,
+`lua/custom/plugins/outline.lua`, `lua/custom/plugins/sleuth.lua`
 
 ---
 
@@ -167,14 +112,7 @@ indentation → Neovim uses 2 spaces. No configuration needed.
 
 ## Practical exercises
 
-1. **Flash jump:** Open a code file, press `s`, type the first two letters of any word
-   you can see on screen, type the label that appears. Notice you jumped there instantly.
-
-2. **Flash remote yank:** Press `yr`, then use flash to navigate to a word elsewhere in
-   the file. Press the label. That word is now in your clipboard without your cursor
-   moving.
-
-3. **Multi-cursor rename:** Find a local variable in code, press `<C-n>` to select it,
+1. **Multi-cursor rename:** Find a local variable in code, press `<C-n>` to select it,
    press `<C-n>` again for each occurrence, then `c` and type the new name.
 
 4. **Outline navigation:** Open a file with many functions/classes. Press `<leader>o`

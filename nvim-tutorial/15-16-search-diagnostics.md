@@ -1,6 +1,6 @@
 # 15 — Search & Replace
 
-**Files:** `lua/custom/plugins/grug-far.lua`, `lua/custom/plugins/todo.lua`,
+**Files:** `lua/custom/plugins/grug-far.lua`,
 `lua/custom/keybindings/linkarzu_keybindings/extra_keybindings_linkarzu.lua`
 
 ---
@@ -50,34 +50,6 @@ anchors match whole words only.
 
 This is the fastest way to do a single-file rename — cursor on a word, `<leader>su`,
 backspace the old word, type the new one, Enter.
-
----
-
-## todo-comments.nvim
-
-```lua
-'folke/todo-comments.nvim'
-opts = { signs = false }
-```
-
-Highlights special comment patterns throughout your code:
-- `TODO:` — highlighted in yellow
-- `FIXME:` / `FIX:` / `BUG:` — in red
-- `HACK:` — in orange (you use this a lot in your markdown keybindings)
-- `NOTE:` / `INFO:` — in blue
-- `WARN:` / `WARNING:` — in orange
-- `PERF:` / `OPTIM:` — in purple
-- `TEST:` / `TESTING:` — in green
-
-`signs = false` disables the sign column indicators (keeping the gutter clean since
-you already have gitsigns and diagnostics there).
-
-**Keymaps (from the default todo-comments setup):**
-- `]t` — jump to next todo comment
-- `[t` — jump to previous todo comment
-- `:TodoTelescope` — Telescope picker of all todo comments in the project
-- `:TodoQuickFix` — Send all todos to quickfix list
-- `:TodoLocList` — Send to location list
 
 ---
 
