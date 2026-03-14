@@ -1,4 +1,10 @@
--- nvim-surround removed: mini.surround (loaded in mini.lua) provides the same
--- functionality. Your markdown keymaps use gsa/gsd/gsr (mini.surround syntax).
--- Keeping both caused subtle keymap conflicts.
-return {}
+return {
+	"kylechui/nvim-surround",
+	version = "*", -- Use for stability; omit to use `main` branch for the latest features
+	event = "VeryLazy",
+	config = function()
+		require("nvim-surround").setup({
+			-- Configuration here, or leave empty to use defaults
+		})
+	end,
+}
