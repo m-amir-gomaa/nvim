@@ -187,11 +187,16 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 
 ## Rust
 
-| Key          | Action          |
-| ------------ | --------------- |
-| `K`          | Hover + actions |
-| `<leader>cr` | Code action     |
-| `<leader>dt` | Testables       |
+| Key          | Action                 |
+| ------------ | ---------------------- |
+| `K`          | Hover + actions        |
+| `<leader>cr` | Code action            |
+| `<leader>ce` | [E]xplain error        |
+| `<leader>cm` | [M]acro expand         |
+| `<leader>cc` | [C]argo: open toml     |
+| `<leader>cj` | Move item down         |
+| `<leader>ck` | Move item up           |
+| `<leader>dt` | Testables              |
 
 ## Terminal
 
