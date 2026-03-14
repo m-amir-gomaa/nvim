@@ -51,7 +51,6 @@ map("v", "gl", "$h", { desc = "[P]Go to the end of the line" })
 
 -- Plugin toggles / utils
 map("n", "<leader><leader>u", ":UndotreeToggle<CR>", { silent = true })
-map("n", "<leader>vs", ":vsplit ~/.vim/hotkeys<CR>", { silent = true })
 
 -- Rustacean keymaps — scoped to Rust buffers only via FileType autocmd
 vim.api.nvim_create_autocmd("FileType", {
