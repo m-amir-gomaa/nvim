@@ -277,9 +277,9 @@ comment marker and a TOC under the first H1. `<leader>mtt` for English headings,
 <leader>mb   (visual)   -- bold selection
 <leader>mb   (normal)   -- toggle bold on word under cursor
 <leader>mx   (visual)   -- strikethrough selection
-gss          (visual)   -- surround with backticks (inline code)
-gss          (normal)   -- surround current word with backticks
-gsu                     -- surround URL under cursor with backticks
+gss (visual) -- surround with backticks (inline code)
+gss (normal) -- surround current word with backticks
+gsu -- surround URL under cursor with backticks
 ```
 
 ### Heading increase/decrease
