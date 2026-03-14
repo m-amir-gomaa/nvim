@@ -115,7 +115,6 @@ local marks in one go.
 
 ```lua
 map('n', '<leader><leader>u', ':UndotreeToggle<CR>', { silent = true })
-map('n', '<leader>vs', ':vsplit ~/.vim/hotkeys<CR>', { silent = true })
 ```
 
 Note: Undotree is bound to `<leader><leader>u` (double-leader), not just `<leader>u`.
