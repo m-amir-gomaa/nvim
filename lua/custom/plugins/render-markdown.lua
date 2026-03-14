@@ -42,7 +42,7 @@ return {
 
 		-- Anti-conceal: show raw text on the cursor line
 		anti_conceal = {
-			enabled = true,
+			enabled = false,
 			above = 0,
 			below = 0,
 			ignore = {
