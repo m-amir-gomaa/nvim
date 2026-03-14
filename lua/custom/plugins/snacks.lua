@@ -11,9 +11,9 @@ return {
 			doc = {
 				inline = true,
 				float = true,
-				max_width = 80,
-				max_height = 40,
-				only_render_image_at_cursor = false,
+				-- Removing max_width/max_height constraints to ensure large diagrams render
+				-- Ensuring diagrams render even when cursor is away
+				only_render_at_cursor = false,
 			},
 			formats = { "png", "jpg", "jpeg", "gif", "webp", "svg" },
 			math = { enabled = true },

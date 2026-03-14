@@ -9,6 +9,7 @@ vim.g.have_nerd_font = true
 -- [[ Options ]]
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.conceallevel = 2 -- Ensure markdown conceals (icons, rendered diagrams) are visible
 vim.o.mouse = "a"
 vim.o.showmode = false
 vim.o.breakindent = true
