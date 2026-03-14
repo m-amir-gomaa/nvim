@@ -59,6 +59,28 @@ return {
 			style = "full",
 		},
 
+		-- Enable LaTeX and Mermaid rendering via external CLI tools
+		-- NOTE: In order to get Mermaid diagrams to render inline natively via
+		-- snacks.image in kitty/ghostty, you MUST have `mermaid-cli` installed
+		-- in your NixOS configuration (do not install it via npm or nix-profile).
+		-- 1. Add `nodePackages.mermaid-cli` to your environment.systemPackages in configuration.nix
+		-- 2. Build your NixOS switch
+		-- 3. `render-markdown` will automatically detect `mmdc` and convert the blocks to SVG inline!
+		latex = {
+			enabled = true,
+			-- Requires pdflatex and imagemagick installed
+			converter = "latex2text",
+			highlight = "RenderMarkdownMath",
+			top_pad = 0,
+			bottom_pad = 0,
+		},
+		mermaid = {
+			enabled = true,
+			-- Requires `native `mmdc` (nodePackages.mermaid-cli) installed
+			executable = "mmdc",
+			args = { "-i", "$_input", "-o", "$_output", "-b", "transparent", "-t", "dark" },
+		},
+
 		-- Disable pattern concealment in markdown (avoids code-block edge artifacts)
 		patterns = {
 			markdown = {

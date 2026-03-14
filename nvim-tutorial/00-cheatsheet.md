@@ -67,14 +67,14 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 
 ## Completion (blink.cmp)
 
-| Key      | Action                          |
-| -------- | ------------------------------- |
-| `<C-j>`  | Select next item                |
-| `<C-k>`  | Select previous item            |
-| `<C-l>`  | Toggle signature help           |
-| `<CR>`   | Accept completion               |
-| `<C-e>`  | Close completion menu           |
-| `<C-spc>`| Manually open menu / docs       |
+| Key       | Action                    |
+| --------- | ------------------------- |
+| `<C-j>`   | Select next item          |
+| `<C-k>`   | Select previous item      |
+| `<C-l>`   | Toggle signature help     |
+| `<CR>`    | Accept completion         |
+| `<C-e>`   | Close completion menu     |
+| `<C-spc>` | Manually open menu / docs |
 
 ## Git (gitsigns)
 
@@ -151,27 +151,27 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 
 ## Treesitter Navigation & Textobjects
 
-| Key          | Action                     |
-| ------------ | -------------------------- |
-| `af` / `if`  | Around/inside function     |
-| `ac` / `ic`  | Around/inside class        |
-| `aa` / `ia`  | Around/inside parameter    |
-| `ab` / `ib`  | Around/inside block        |
-| `]f` / `[f`  | Next/prev function         |
-| `]c` / `[c`  | Next/prev class            |
-| `[x`         | Jump to treesitter context |
+| Key         | Action                     |
+| ----------- | -------------------------- |
+| `af` / `if` | Around/inside function     |
+| `ac` / `ic` | Around/inside class        |
+| `aa` / `ia` | Around/inside parameter    |
+| `ab` / `ib` | Around/inside block        |
+| `]f` / `[f` | Next/prev function         |
+| `]c` / `[c` | Next/prev class            |
+| `[x`        | Jump to treesitter context |
 
 ## vim-surround
 
-| Key                 | Action                            |
-| ------------------- | --------------------------------- |
-| `ys{motion}{char}`  | Add surround                      |
-| `ds{char}`          | Delete surround                   |
-| `cs{old}{new}`      | Replace surround                  |
-| `S{char}` (visual)  | Surround selection                |
-| `gss` (normal)      | Surround word with backticks      |
-| `gss` (visual)      | Surround selection with backticks |
-| `gsu`               | Surround URL with backticks       |
+| Key                | Action                            |
+| ------------------ | --------------------------------- |
+| `ys{motion}{char}` | Add surround                      |
+| `ds{char}`         | Delete surround                   |
+| `cs{old}{new}`     | Replace surround                  |
+| `S{char}` (visual) | Surround selection                |
+| `gss` (normal)     | Surround word with backticks      |
+| `gss` (visual)     | Surround selection with backticks |
+| `gsu`              | Surround URL with backticks       |
 
 ## Debugging (DAP)
 
@@ -235,7 +235,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>ml`   | Copy all HTTPS links                           |
 | `<leader>mR`   | Restart Marksman LSP                           |
 | `<leader>mtt`  | Insert/update TOC (English)                    |
-| `<leader>mts`  | Insert/update TOC (Spanish)                    |
+| `<leader>mtg`  | Insert/update TOC (German)                     |
 | `<leader>mm`   | Jump to TOC                                    |
 | `<leader>mn`   | Return from TOC                                |
 | `<leader>md`   | Toggle bullet point                            |
@@ -246,7 +246,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>mT`   | Show heading context info                      |
 | `<C-CR>`       | Insert heading emacs-style                     |
 | `<leader>msle` | Spell: English                                 |
-| `<leader>msls` | Spell: Spanish                                 |
+| `<leader>mslg` | Spell: German                                  |
 | `<leader>mslb` | Spell: Both                                    |
 | `<leader>mss`  | Accept first spell suggestion                  |
 | `<leader>msg`  | Add word to spellfile                          |
