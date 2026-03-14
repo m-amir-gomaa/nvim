@@ -18,6 +18,13 @@ return {
 				},
 			})
 
+			local markdownlint = lint.linters["markdownlint-cli2"]
+			markdownlint.args = {
+				"--config",
+				vim.fn.stdpath("config") .. "/markdownlint.yaml",
+				"--",
+			}
+
 			lint.linters_by_ft = {
 				markdown = { "markdownlint-cli2" },
 				lua = { "selene" },
@@ -27,18 +34,6 @@ return {
 				html = { "htmlhint" },
 				yaml = { "yamllint" },
 			}
-			-- Override Markdown options (replace '--style MD041' with your desired args)
-			-- you can disable markdown linting by adding this line on top of the file
-			-- <! -- markdownlint-disable -->
-			-- you can disable it by adding this line at the end of the specified section if you don't want to disable it for the whole file
-			-- <! markdownlint-restore -->
-			-- you can do the same with <--! prettier-ignore-start --> and <--! prettier-ignore-end --> respectively
-			lint.try_lint_markdown = function()
-				require("lint").lint({
-					linter = "markdownlint-cli2",
-					args = { "--config", os.getenv("HOME") .. "/.config/nvim/markdownlint.yaml" },
-				})
-			end
 			-- To allow other plugins to add linters to require('lint').linters_by_ft,
 			-- instead set linters_by_ft like this:
 			-- lint.linters_by_ft = lint.linters_by_ft or {}

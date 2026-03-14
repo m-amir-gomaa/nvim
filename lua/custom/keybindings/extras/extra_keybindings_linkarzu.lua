@@ -400,31 +400,40 @@ if vim.g.simpler_scrollback ~= "deeznuts" then
 		end
 		file:write(text)
 		file:close()
-		-- Run Prettier on the temporary file to format it
-		-- Adding > /dev/null 2>&1' because if the command produces output, I see that
-		-- in the neovim buffer
-		local cmd = 'prettier --prose-wrap never --write "' .. temp_file .. '" > /dev/null 2>&1'
-		local result = os.execute(cmd)
-		if result ~= 0 then
-			vim.notify("Error: Prettier formatting failed.", vim.log.levels.ERROR)
-			os.remove(temp_file)
-			return
-		end
-		-- Read the formatted text from the temporary file
-		file = io.open(temp_file, "r")
-		if file == nil then
-			vim.notify("Error: Cannot read from temporary file.", vim.log.levels.ERROR)
-			os.remove(temp_file)
-			return
-		end
-		local formatted_text = file:read("*all")
-		file:close()
-		-- Copy the formatted text to the system clipboard
-		vim.fn.setreg("+", formatted_text)
-		-- Delete the temporary file
-		os.remove(temp_file)
-		-- Notify the user
-		vim.notify("yanked markdown with --prose-wrap never", vim.log.levels.INFO)
+		-- Run Prettier asynchronously on the temporary file
+		-- --prose-wrap never: joins hard-wrapped lines (from proseWrap:always) into
+		-- one long line so the text flows naturally when pasted into Slack/Discord/browser
+		vim.fn.jobstart({ "prettier", "--prose-wrap", "never", "--write", temp_file }, {
+			on_exit = function(_, exit_code)
+				if exit_code ~= 0 then
+					vim.schedule(function()
+						vim.notify("Error: Prettier formatting failed.", vim.log.levels.ERROR)
+						os.remove(temp_file)
+					end)
+					return
+				end
+				-- Read the formatted text from the temporary file
+				local fh = io.open(temp_file, "r")
+				if fh == nil then
+					vim.schedule(function()
+						vim.notify("Error: Cannot read from temporary file.", vim.log.levels.ERROR)
+						os.remove(temp_file)
+					end)
+					return
+				end
+				local formatted_text = fh:read("*all")
+				fh:close()
+				os.remove(temp_file)
+				-- Strip the trailing newline prettier always appends, so pasting into
+				-- Slack/Discord/browser doesn't add a blank line at the end
+				formatted_text = formatted_text:gsub("\n$", "")
+				vim.schedule(function()
+					-- Copy the formatted text to the system clipboard
+					vim.fn.setreg("+", formatted_text)
+					vim.notify("yanked markdown with --prose-wrap never", vim.log.levels.INFO)
+				end)
+			end,
+		})
 	end, { desc = "[P]Copy selection formatted with Prettier", noremap = true, silent = true })
 end
 
