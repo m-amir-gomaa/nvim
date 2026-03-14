@@ -71,16 +71,16 @@ local function handle_image_paste(img_dir)
 					or string.rep("../", levels) .. "assets/" .. IMAGE_STORAGE_PATH
 				vim.api.nvim_put({ "![Image](" .. relative_path .. '){: width="500" }' }, "c", true, true)
 				-- Capital "O" to move to the line above
-				vim.cmd("normal! O")
+				vim.cmd.normal({ "O", bang = true })
 				-- This "o" is to leave a blank line above
-				vim.cmd("normal! o")
+				vim.cmd.normal({ "o", bang = true })
 				vim.api.nvim_put({ "<!-- prettier-ignore -->" }, "c", true, true)
-				vim.cmd("normal! jo")
+				vim.cmd.normal({ "jo", bang = true })
 				vim.api.nvim_put({ "_textimage_", "" }, "c", true, true)
 				-- find image path and add a / at the end of it
-				vim.cmd("normal! kkf)i/")
+				vim.cmd.normal({ "kkf)i/", bang = true })
 				-- Move one to the right and enter insert mode
-				vim.cmd("normal! la")
+				vim.cmd.normal({ "la", bang = true })
 				-- -- This puts me in insert mode where the cursor is
 				-- vim.api.nvim_feedkeys("i", "n", true)
 				autosave_on()
@@ -120,16 +120,16 @@ local function handle_image_paste(img_dir)
 									else
 										if paste_image(img_dir, full_image_name, selected_ext, process_command) then
 											vim.api.nvim_put({ '{: width="500" }' }, "c", true, true)
-											vim.cmd("normal! O")
-											vim.cmd("stopinsert")
-											vim.cmd("normal! o")
+											vim.cmd.normal({ "O", bang = true })
+											vim.cmd.stopinsert()
+											vim.cmd.normal({ "o", bang = true })
 											vim.api.nvim_put({ "<!-- prettier-ignore -->" }, "c", true, true)
-											vim.cmd("normal! j$o")
-											vim.cmd("stopinsert")
+											vim.cmd.normal({ "j$o", bang = true })
+											vim.cmd.stopinsert()
 											vim.api.nvim_put({ "__" }, "c", true, true)
-											vim.cmd("normal! h")
+											vim.cmd.normal({ "h", bang = true })
 											vim.cmd("silent! update")
-											vim.cmd("edit!")
+											vim.cmd.edit({ bang = true })
 											autosave_on()
 										else
 											print("No image pasted. File not updated.")
@@ -182,19 +182,19 @@ local function handle_image_paste(img_dir)
 						if paste_image(img_dir, full_image_name) then
 							vim.api.nvim_put({ '{: width="500" }' }, "c", true, true)
 							-- Create new line above and force normal mode
-							vim.cmd("normal! O")
-							vim.cmd("stopinsert") -- Explicitly exit insert mode
+							vim.cmd.normal({ "O", bang = true })
+							vim.cmd.stopinsert() -- Explicitly exit insert mode
 							-- Create blank line above and force normal mode
-							vim.cmd("normal! o")
-							vim.cmd("stopinsert")
+							vim.cmd.normal({ "o", bang = true })
+							vim.cmd.stopinsert()
 							vim.api.nvim_put({ "<!-- prettier-ignore -->" }, "c", true, true)
 							-- Move down and create new line (without staying in insert mode)
-							vim.cmd("normal! j$o")
-							vim.cmd("stopinsert")
+							vim.cmd.normal({ "j$o", bang = true })
+							vim.cmd.stopinsert()
 							vim.api.nvim_put({ "__" }, "c", true, true)
-							vim.cmd("normal! h") -- Position cursor between underscores
+							vim.cmd.normal({ "h", bang = true }) -- Position cursor between underscores
 							vim.cmd("silent! update")
-							vim.cmd("edit!")
+							vim.cmd.edit({ bang = true })
 							autosave_on()
 						else
 							print("No image pasted. File not updated.")
@@ -346,7 +346,7 @@ vim.keymap.set("n", "<leader>iR", function()
 				end
 			end
 			-- "Update" saves only if the buffer has been modified since the last save
-			vim.cmd("update")
+			vim.cmd.update()
 			vim.api.nvim_echo({
 				{ "Image renamed successfully", "Normal" },
 			}, false, {})
@@ -381,13 +381,13 @@ if vim.g.simpler_scrollback ~= "deeznuts" then
 		-- Check if the current buffer's filetype is markdown
 		if vim.bo.filetype ~= "markdown" then
 			-- Not a Markdown file, copy the selection to the system clipboard
-			vim.cmd('normal! "+y')
+			vim.cmd.normal({ '"+y', bang = true })
 			-- Optionally, notify the user
 			vim.notify("Yanked to system clipboard", vim.log.levels.INFO)
 			return
 		end
 		-- Yank the selected text into register 'z' without affecting the unnamed register
-		vim.cmd('silent! normal! "zy')
+		vim.cmd.normal({ '"zy', bang = true, mods = { silent = true } })
 		-- Get the yanked text from register 'z'
 		local text = vim.fn.getreg("z")
 		-- Path to a temporary file (uses a unique temporary file name)
@@ -518,6 +518,6 @@ vim.keymap.set(
 -- Set up a keymap to refresh the current buffer
 vim.keymap.set("n", "<leader>br", function()
 	-- Reloads the file to reflect the changes
-	vim.cmd("edit!")
+	vim.cmd.edit({ bang = true })
 	print("Buffer reloaded")
 end, { desc = "[P]Reload current buffer" })

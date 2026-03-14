@@ -59,10 +59,10 @@ vim.keymap.set("n", "<leader>mR", function()
 		end
 	end
 	if is_running then
-		vim.cmd("LspRestart marksman")
+		vim.cmd.LspRestart("marksman")
 		vim.notify("Marksman LSP restarted", vim.log.levels.INFO)
 	else
-		vim.cmd("LspStart marksman")
+		vim.cmd.LspStart("marksman")
 		vim.notify("Marksman LSP started", vim.log.levels.INFO)
 	end
 end, { desc = "[P]Start/Restart Marksman LSP" })
@@ -100,7 +100,7 @@ vim.keymap.set("n", "vio", function()
 		return
 	end
 	-- Visual-select lines open+1 .. close-1
-	vim.cmd(("normal! %dGV%dG"):format(open + 1, close - 1))
+	vim.cmd.normal({ ("%dGV%dG"):format(open + 1, close - 1), bang = true })
 end, { desc = "[P]Select inside fenced code-block" })
 
 -- Keymap to auto-format and save all Markdown files in the CURRENT REPOSITORY,
@@ -132,7 +132,7 @@ vim.keymap.set("n", "<leader>mfA", function()
 		require("conform").format({ bufnr = bufnr })
 		-- Save the buffer to write changes to disk
 		vim.api.nvim_buf_call(bufnr, function()
-			vim.cmd("write")
+			vim.cmd.write()
 		end)
 		print("Formatted and saved: " .. file)
 	end
@@ -266,7 +266,7 @@ vim.keymap.set("n", "<leader>mfY", function()
 		vim.fn.bufload(bufnr)
 		local result = process_embeds_in_buffer(bufnr)
 		vim.api.nvim_buf_call(bufnr, function()
-			vim.cmd("write")
+			vim.cmd.write()
 		end)
 		local status = result.error and ("Error: " .. result.error) or result.message
 		print(string.format("%s: %s", file, status))
@@ -403,7 +403,7 @@ vim.keymap.set("n", "<M-x>", function()
 	-- NOTE: Customize the heading and its level
 	local tasks_heading = "## Completed Tasks"
 	-- Save the view to preserve folds
-	vim.cmd("mkview")
+	vim.cmd.mkview()
 	local api = vim.api
 	-- Retrieve buffer & lines
 	local buf = api.nvim_get_current_buf()
@@ -413,7 +413,7 @@ vim.keymap.set("n", "<M-x>", function()
 	local total_lines = #lines
 	-- If cursor is beyond last line, do nothing
 	if start_line >= total_lines then
-		vim.cmd("loadview")
+		vim.cmd.loadview()
 		return
 	end
 	------------------------------------------------------------------------------
@@ -438,7 +438,7 @@ vim.keymap.set("n", "<M-x>", function()
 	if not bullet_line:match("^%s*%- %[[x ]%]") then
 		-- Not a task bullet => show a message and return
 		print("Not a task bullet: no action taken.")
-		vim.cmd("loadview")
+		vim.cmd.loadview()
 		return
 	end
 	------------------------------------------------------------------------------
@@ -585,8 +585,8 @@ vim.keymap.set("n", "<M-x>", function()
 	end
 	-- Write changes and restore view to preserve folds
 	-- "Update" saves only if the buffer has been modified since the last save
-	vim.cmd("silent update")
-	vim.cmd("loadview")
+	vim.cmd.update({ mods = { silent = true } })
+	vim.cmd.loadview()
 end, { desc = "[P]Toggle task and move it to 'done'" })
 
 -- -- Toggle bullet point at the beginning of the current line in normal mode
@@ -622,7 +622,7 @@ end, { desc = "[P]Toggle task and move it to 'done'" })
 -- "localoptions" to vim.opt.sessionoptions in the `lua/config/options.lua` file
 vim.keymap.set("n", "<leader>msle", function()
 	vim.opt.spelllang = "en"
-	vim.cmd("echo 'Spell language set to English'")
+	print("Spell language set to English")
 end, { desc = "[P]Spelling language English" })
 
 -- HACK: neovim spell multiple languages
@@ -631,7 +631,7 @@ end, { desc = "[P]Spelling language English" })
 -- Keymap to switch spelling language to German lamw25wmal
 vim.keymap.set("n", "<leader>msls", function()
 	vim.opt.spelllang = "es"
-	vim.cmd("echo 'Spell language set to German'")
+	print("Spell language set to German")
 end, { desc = "[P]Spelling language German" })
 
 -- HACK: neovim spell multiple languages
@@ -640,7 +640,7 @@ end, { desc = "[P]Spelling language German" })
 -- Keymap to switch spelling language to both german and english lamw25wmal
 vim.keymap.set("n", "<leader>mslb", function()
 	vim.opt.spelllang = "en,es"
-	vim.cmd("echo 'Spell language set to German and English'")
+	print("Spell language set to German and English")
 end, { desc = "[P]Spelling language German and English" })
 
 -- HACK: neovim spell multiple languages
@@ -655,7 +655,7 @@ vim.keymap.set("n", "<leader>mss", function()
 	-- If {mode} is absent, keys are remapped.
 	--
 	-- I tried this keymap as usually with
-	vim.cmd("normal! 1z=")
+	vim.cmd.normal({ "1z=", bang = true })
 	-- But didn't work, only with nvim_feedkeys
 	-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("z=", true, false, true), "m", true)
 end, { desc = "[P]Spelling suggestions" })
@@ -666,9 +666,9 @@ end, { desc = "[P]Spelling suggestions" })
 -- markdown good, accept spell suggestion
 -- Add word under the cursor as a good word
 vim.keymap.set("n", "<leader>msg", function()
-	vim.cmd("normal! zg")
+	vim.cmd.normal({ "zg", bang = true })
 	-- I do a write so that harper is updated
-	vim.cmd("silent write")
+	vim.cmd.write({ mods = { silent = true } })
 end, { desc = "[P]Spelling add word to spellfile" })
 
 -- HACK: neovim spell multiple languages
@@ -676,7 +676,7 @@ end, { desc = "[P]Spelling add word to spellfile" })
 --
 -- Undo zw, remove the word from the entry in 'spellfile'.
 vim.keymap.set("n", "<leader>msu", function()
-	vim.cmd("normal! zug")
+	vim.cmd.normal({ "zug", bang = true })
 end, { desc = "[P]Spelling undo, remove word from list" })
 
 -- HACK: neovim spell multiple languages
@@ -751,7 +751,7 @@ vim.keymap.set("v", "<leader>mx", function()
 	if selected_text:match("^%~%~.*%~%~$") then
 		vim.notify("Text already has strikethrough", vim.log.levels.INFO)
 	else
-		vim.cmd("normal 2gsa~")
+		vim.cmd.normal({ "2gsa~" })
 	end
 end, { desc = "[P]Strike through current selection" })
 
@@ -767,7 +767,7 @@ vim.keymap.set("v", "<leader>mb", function()
 	if selected_text:match("^%*%*.*%*%*$") then
 		vim.notify("Text already bold", vim.log.levels.INFO)
 	else
-		vim.cmd("normal 2gsa*")
+		vim.cmd.normal({ "2gsa*" })
 	end
 end, { desc = "[P]BOLD current selection" })
 
@@ -828,10 +828,10 @@ vim.keymap.set("n", "<leader>mb", function()
 		local after = line:sub(col + 1)
 		local inside_surround = before:match("%*%*[^%*]*$") and after:match("^[^%*]*%*%*")
 		if inside_surround then
-			vim.cmd("normal gsd*.")
+			vim.cmd.normal({ "gsd*." })
 		else
-			vim.cmd("normal viw")
-			vim.cmd("normal 2gsa*")
+			vim.cmd.normal({ "viw" })
+			vim.cmd.normal({ "2gsa*" })
 		end
 		vim.notify("Bolded current word", vim.log.levels.INFO)
 	end
@@ -1023,7 +1023,7 @@ vim.keymap.set("n", "<leader>td", function()
 		-- Set the modified line
 		vim.fn.setline(line_number, new_line)
 	else
-		vim.cmd("echo 'todo item not detected'")
+		print("todo item not detected")
 	end
 end, { desc = "[P]TODO toggle item done or not" })
 
@@ -1040,7 +1040,7 @@ local function update_markdown_toc(heading2, heading3)
 	local bufnr = 0 -- The current buffer number, 0 references the current active buffer
 	-- Save the current view
 	-- If I don't do this, my folds are lost when I run this keymap
-	vim.cmd("mkview")
+	vim.cmd.mkview()
 	-- Retrieves all lines from the current buffer
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 	local toc_exists = false -- Flag to check if TOC marker exists
@@ -1087,15 +1087,15 @@ local function update_markdown_toc(heading2, heading3)
 		vim.api.nvim_buf_set_lines(bufnr, insertion_line, insertion_line, false, { heading2, heading3, "<!-- toc -->" })
 	end
 	-- Silently save the file, in case TOC is being created for the first time
-	vim.cmd("silent write")
+	vim.cmd.write({ mods = { silent = true } })
 	-- Silently run markdown-toc to update the TOC without displaying command output
 	-- vim.fn.system("markdown-toc -i " .. path)
 	-- I want my bulletpoints to be created only as "-" so passing that option as
 	-- an argument according to the docs
 	-- https://github.com/jonschlinkert/markdown-toc?tab=readme-ov-file#optionsbullets
 	vim.fn.system('markdown-toc --bullets "-" -i ' .. path)
-	vim.cmd("edit!") -- Reloads the file to reflect the changes made by markdown-toc
-	vim.cmd("silent write") -- Silently save the file
+	vim.cmd.edit({ bang = true }) -- Reloads the file to reflect the changes made by markdown-toc
+	vim.cmd.write({ mods = { silent = true } }) -- Silently save the file
 	vim.notify("TOC updated and file saved", vim.log.levels.INFO)
 	-- -- In case a cleanup is needed, leaving this old code here as a reference
 	-- -- I used this code before I implemented the frontmatter check
@@ -1115,7 +1115,7 @@ local function update_markdown_toc(heading2, heading3)
 	--   end
 	-- end
 	-- Restore the saved view (including folds)
-	vim.cmd("loadview")
+	vim.cmd.loadview()
 end
 
 -- HACK: Create table of contents in neovim with markdown-toc
@@ -1144,7 +1144,7 @@ vim.keymap.set("n", "<leader>mm", function()
 	-- Perform a silent search for the <!-- toc --> marker and move the cursor two lines below it
 	vim.cmd("silent! /<!-- toc -->\\n\\n\\zs.*")
 	-- Clear the search highlight without showing the "search hit BOTTOM, continuing at TOP" message
-	vim.cmd("nohlsearch")
+	vim.cmd.nohlsearch()
 	-- Retrieve the current cursor position (after moving to the TOC)
 	local cursor_pos = vim.api.nvim_win_get_cursor(0)
 	local row = cursor_pos[1]
