@@ -714,29 +714,21 @@ vim.keymap.set("n", "gsu", function()
 	print("No URL found under cursor")
 end, { desc = "[P]Add surrounding to URL" })
 
--- Remap 'gss' to 'gsa`' in visual mode
+-- Remap 'gss' to 'S`' in visual mode
 -- This surrounds with inline code, that I use a lot lamw25wmal
 vim.keymap.set("v", "gss", function()
 	-- Use nvim_replace_termcodes to handle special characters like backticks
-	local keys = vim.api.nvim_replace_termcodes("gsa`", true, false, true)
+	local keys = vim.api.nvim_replace_termcodes("S`", true, false, true)
 	-- Feed the keys in visual mode ('x' for visual mode)
-	vim.api.nvim_feedkeys(keys, "x", false)
-	-- I tried these 3, but they didn't work, I assume because of the backtick character
-	-- vim.cmd("normal! gsa`")
-	-- vim.cmd([[normal! gsa`]])
-	-- vim.cmd("normal! gsa\\`")
+	vim.api.nvim_feedkeys(keys, "m", false)
 end, { desc = "[P] Surround selection with backticks (inline code)" })
 
 -- This surrounds CURRENT WORD with inline code in NORMAL MODE lamw25wmal
 vim.keymap.set("n", "gss", function()
 	-- Use nvim_replace_termcodes to handle special characters like backticks
-	local keys = vim.api.nvim_replace_termcodes("gsaiw`", true, false, true)
+	local keys = vim.api.nvim_replace_termcodes("ysiw`", true, false, true)
 	-- Feed the keys in visual mode ('x' for visual mode)
-	vim.api.nvim_feedkeys(keys, "x", false)
-	-- I tried these 3, but they didn't work, I assume because of the backtick character
-	-- vim.cmd("normal! gsa`")
-	-- vim.cmd([[normal! gsa`]])
-	-- vim.cmd("normal! gsa\\`")
+	vim.api.nvim_feedkeys(keys, "m", false)
 end, { desc = "[P] Surround selection with backticks (inline code)" })
 
 -- In visual mode, check if the selected text is already striked through and show a message if it is
@@ -751,7 +743,7 @@ vim.keymap.set("v", "<leader>mx", function()
 	if selected_text:match("^%~%~.*%~%~$") then
 		vim.notify("Text already has strikethrough", vim.log.levels.INFO)
 	else
-		vim.cmd.normal({ "2gsa~" })
+		vim.cmd.normal({ "2S~" })
 	end
 end, { desc = "[P]Strike through current selection" })
 
@@ -767,7 +759,7 @@ vim.keymap.set("v", "<leader>mb", function()
 	if selected_text:match("^%*%*.*%*%*$") then
 		vim.notify("Text already bold", vim.log.levels.INFO)
 	else
-		vim.cmd.normal({ "2gsa*" })
+		vim.cmd.normal({ "2S*" })
 	end
 end, { desc = "[P]BOLD current selection" })
 
@@ -828,10 +820,10 @@ vim.keymap.set("n", "<leader>mb", function()
 		local after = line:sub(col + 1)
 		local inside_surround = before:match("%*%*[^%*]*$") and after:match("^[^%*]*%*%*")
 		if inside_surround then
-			vim.cmd.normal({ "gsd*." })
+			vim.cmd.normal({ "ds*ds*" })
 		else
 			vim.cmd.normal({ "viw" })
-			vim.cmd.normal({ "2gsa*" })
+			vim.cmd.normal({ "2S*" })
 		end
 		vim.notify("Bolded current word", vim.log.levels.INFO)
 	end
