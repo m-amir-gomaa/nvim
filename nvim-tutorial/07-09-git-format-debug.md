@@ -94,6 +94,32 @@ This lets you make "dirty" working sessions and still produce clean, atomic comm
 
 ---
 
+# 07b — LazyGit (the TUI)
+
+While `gitsigns` handles inline diffs and hunk staging, **LazyGit** provides a full terminal user interface (TUI) for complex git operations (rebasing, stashing, branch management) without leaving Neovim.
+
+**File:** `lua/custom/plugins/snacks.lua`
+
+## Launching LazyGit
+
+```lua
+map('n', '<leader>gg', function() Snacks.lazygit() end)
+```
+
+-   `<leader>gg` — Opens LazyGit in a floating terminal.
+-   `q` — Inside LazyGit, quits the TUI and returns to your buffer.
+
+## Why use LazyGit?
+
+1.  **Visual Staging:** Press `space` on files or individual lines to stage them.
+2.  **Commit Crafting:** Press `c` to commit; `A` to amend.
+3.  **Branching:** Press `b` to see branches; `f` to fetch; `p` to pull.
+4.  **Undo Everything:** It has a robust undo history for git commands.
+
+LazyGit is integrated via `snacks.nvim`, which handles the terminal wrapping and ensures it opens in the correct directory (your project root).
+
+---
+
 # 08 — Formatting & Linting
 
 **Files:** `lua/custom/plugins/conform.lua`, `lua/kickstart/plugins/lint.lua`

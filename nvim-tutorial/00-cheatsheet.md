@@ -90,7 +90,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>hd` | Diff against index       |
 | `<leader>hD` | Diff against last commit |
 | `<leader>tb` | Toggle inline blame      |
-| `<leader>gg` | Lazygit                  |
+| `<leader>gg` | LazyGit                  |
 
 ## Harpoon
 
