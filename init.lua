@@ -49,7 +49,7 @@ vim.diagnostic.config({
 	float = { border = "rounded", source = "if_many" },
 	underline = { severity = vim.diagnostic.severity.ERROR },
 	virtual_text = true,
-	virtual_lines = false,
+	virtual_lines = true,
 	jump = { float = true },
 })
 

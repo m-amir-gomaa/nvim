@@ -7,8 +7,8 @@ return {
 			transparent = false, -- Enable this to disable the bg color
 			styles = {
 				-- You can set any of the style values specified for `:h nvim_set_hl`
-				comments = {},
-				functions = {},
+				comments = { italic = true }, -- italicise comments
+				functions = { bold = true }, -- bold function names
 				keywords = {},
 				lsp = {},
 				match_paren = {},

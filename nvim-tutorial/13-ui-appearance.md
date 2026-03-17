@@ -2,7 +2,8 @@
 
 **Files:** `lua/custom/plugins/no-clown-fiesta.lua`, `lua/custom/plugins/snacks.lua`,
 `lua/custom/plugins/mini.lua`, `lua/custom/plugins/which-key.lua`,
-`lua/custom/plugins/nvim-colorizer.lua`, `lua/kickstart/plugins/indent_line.lua`
+`lua/custom/plugins/nvim-colorizer.lua`, `lua/custom/plugins/indent_line.lua`,
+`lua/custom/plugins/express_line.lua`
 
 ---
 
@@ -16,7 +17,7 @@ A restrained, low-saturation dark theme. The name says it all — it avoids the 
 explosion of many code themes. Syntax highlighting uses a limited, harmonious palette
 that reduces eye strain during long sessions.
 
-Options you can tweak:
+Options you can tweak in `no-clown-fiesta.lua`:
 ```lua
 require('no-clown-fiesta').setup {
   theme = 'dark',       -- 'dark', 'dim', or 'light'
@@ -34,86 +35,81 @@ require('no-clown-fiesta').setup {
 
 ## Snacks.nvim — the full picture
 
-snacks.nvim is a collection of small, well-crafted plugins by folke. You now have
+`snacks.nvim` is a collection of small, well-crafted plugins by folke. You now have
 these modules enabled:
+
+### image
+
+Enables image rendering directly in Neovim buffers. This is especially powerful in
+Markdown files.
+
+*   **Inline images:** Renders image links `![]()` as actual images in the buffer.
+*   **Mermaid diagrams:** Renders Mermaid code blocks as diagrams (if mermaid-cli is available).
+*   **Performance:** Configured to `only_render_at_cursor = true` to maintain responsiveness.
+
+> [!TIP]
+> Ensure `conceallevel = 2` is set in your `init.lua` to see the rendered images and diagrams
+> without the markdown syntax cluttering the view.
 
 ### notifier
 
 Replaces `vim.notify` with a non-blocking notification system. Notifications appear
-in the top-right corner, stack, fade away. `<leader>sN` opens history of all
-notifications in the session.
+in the top-right corner, stack, and fade away.
 
-`<leader>nd` — dismiss all current notifications.
-
-> **Why it matters:** With the default `vim.notify`, error messages during async
-> operations can appear at the bottom of the screen and be missed. The notifier makes
-> them impossible to miss while not blocking your workflow.
-
-### words
-
-Highlights all occurrences of the word under cursor throughout the buffer, updated as
-you move. This is similar to the LSP document highlight feature but works even without
-an LSP and is instant. The two features stack in practice.
-
-### scroll
-
-Smooth scrolling is currently **disabled** (`enabled = false`) in your config
-to maintain a snappy, instant feel during navigation. If you want animated
-transitions for `<C-d>`, `<C-u>`, etc., you can enable this in `snacks.lua`.
+*   `<leader>sN` — Open notification history.
+*   `<leader>nd` — Dismiss all current notifications.
 
 ### statuscolumn
 
 An enhanced status column (left gutter) with better formatting of line numbers, signs,
-and fold indicators. Works in concert with gitsigns and diagnostics for a cleaner left
-margin.
+and fold indicators. It creates a much cleaner look than the default Neovim gutter.
 
-### quickfile
+### quickfile & bigfile
 
-Speeds up opening files by bypassing some Neovim startup overhead for single-file
-invocations (`nvim myfile.go`).
+*   **quickfile**: Speeds up opening files by bypassing startup overhead.
+*   **bigfile**: Automatically disables expensive features (Treesitter, LSP) for files over 1.5MB to prevent lag.
 
-### bigfile
+### Modules currently disabled
 
-Automatically disables expensive features (treesitter, LSP, syntax highlighting, spell
-check) for files over a size threshold (1.5MB).
+*   **words**: Highlighting word under cursor is currently **disabled** (`enabled = false`).
+*   **scroll**: Smooth scrolling is **disabled** to maintain a snappy, instant feel.
+*   **indent**: Snacks' indent guides are disabled in favor of `indent-blankline.nvim`.
 
-### lazygit (`<leader>gg`)
+---
 
-Opens lazygit in a floating terminal. Requires lazygit to be installed. A full
-terminal UI for git — staging hunks, writing commit messages, viewing history,
-rebasing, all in one place.
+## Statusline
 
-### zen mode (`<leader>z`)
+You have two statusline options available:
 
-Centres the current buffer in a clean, distraction-free view. Hides the statusline,
-sign column, and surrounding splits. Good for writing markdown or prose.
+### express_line.nvim (Primary)
+
+Located in `lua/custom/plugins/express_line.lua`. It provides a highly customizable
+and performant statusline.
+
+Current layout:
+`[MODE] [GIT BRANCH] [FILENAME] | [FILETYPE] [LINE:COL]`
+
+### mini.statusline (Alternative)
+
+Located in `lua/custom/plugins/mini.lua`. A clean, minimal statusline that serves as a
+solid fallback or lightweight alternative.
 
 ---
 
 ## mini.nvim
 
-You load three mini modules:
-
 ### mini.ai (textobjects)
-
-```lua
-require('mini.ai').setup { n_lines = 500 }
-```
 
 Extends Vim's built-in `i`/`a` textobjects with smarter versions:
 - `ib` / `ab` — inside/around any bracket type (auto-detects `()`, `[]`, `{}`)
 - `iq` / `aq` — inside/around any quote type (`'`, `"`, `` ` ``)
-- Works across multiple lines (up to `n_lines = 500` lines)
-- `in)` — inside the *next* `(...)` after cursor (not the one you're in)
-- `il` / `al` — inside/around last bracket/quote
+- `in)` — inside the *next* `(...)` after cursor.
+- `il` / `al` — inside/around last bracket/quote.
 
 ### vim-surround
 
-```lua
-require('vim-surround') -- Installed via tpope/vim-surround
-```
-
-Adds, deletes, and changes surrounding pairs. Default keymaps:
+Managed via `tpope/vim-surround` (in `surround.lua`). Adds, deletes, and changes
+surrounding pairs.
 
 | Keymap | Action | Example |
 |--------|--------|---------|
@@ -122,82 +118,37 @@ Adds, deletes, and changes surrounding pairs. Default keymaps:
 | `cs{old}{new}` | Replace surround | `cs"'` → changes `"` to `'` |
 | `S{char}` | Visual surround | Select text, `S"` → adds `"` |
 
-Your markdown keymaps use this:
-- `gss` (normal) → `ysiw\`` — surrounds current word with backticks (inline code)
-- `gss` (visual) → `S\`` — surrounds selection with backtick
-
-### mini.statusline
-
-```lua
-statusline.setup { use_icons = vim.g.have_nerd_font }
-statusline.section_location = function() return '%2l:%-2v' end
-```
-
-A clean, minimal statusline. The location section shows `LINE:COL` format.
-
 ---
 
 ## which-key.nvim
 
-which-key shows a popup after a brief pause when you press a prefix key (like
-`<leader>`), listing all completions with their descriptions.
+Shows a popup listing available keybindings. The delay is set to `0` for instant feedback.
 
-```lua
-delay = 0,  -- shows immediately when you pause
-```
-
-Your group definitions:
-```lua
-{ '<leader>c', group = '[C]ode' }
-{ '<leader>d', group = '[D]ocument' }
-{ '<leader>r', group = '[R]ename' }
-{ '<leader>s', group = '[S]earch' }
-{ '<leader>w', group = '[W]orkspace' }
-{ '<leader>t', group = '[T]oggle / Trouble' }
-{ '<leader>h', group = 'Git [H]unk' }
-{ '<leader>q', group = '[Q]uickfix' }
-{ '<leader>n', group = '[N]otifications' }
-{ '<leader>g', group = '[G]it' }
-```
-
----
-
-## nvim-colorizer
-
-```lua
-'norcalli/nvim-colorizer.lua'
-```
-
-Colours hex codes and CSS colour names in-buffer. `#ff5733` appears with a background
-of that colour. Useful when editing theme files, CSS, or any config with hex values.
+Key groups defined in `which-key.lua`:
+*   `<leader>c` — [C]ode
+*   `<leader>d` — [D]ocument
+*   `<leader>s` — [S]earch
+*   `<leader>g` — [G]it
+*   `<leader>i` — [I]mage
+*   `<leader>m` — [M]arkdown
+*   `<leader>t` — [T]oggle / Trouble
 
 ---
 
 ## Indent Guides
 
-Your configuration currently does **not** have active indent guides. Both
-`indent-blankline.nvim` and `snacks.indent` are present in your plugin files but
-are **disabled** or unconfigured by default.
+Indent guides are provided by `indent-blankline.nvim` (in `indent_line.lua`).
 
-To enable indent guides, you can set `enabled = true` in `lua/custom/plugins/snacks.lua`
-under the `indent` module.
+*   **Scope:** Shows the current indentation scope with a visible line.
+*   **Disabled in:** Help, Alpha, Neo-tree, and other utility windows to reduce visual noise.
 
 ---
 
 ## Practical exercises
 
-1. **Toggle zen mode:** Press `<leader>z` while editing a markdown file. Notice the
-   distraction-free layout. Press again to return.
-
-2. **Trigger the notifier:** Run `:lua vim.notify('Hello ' .. vim.fn.expand('%'), vim.log.levels.INFO)`.
-   See it appear. Press `<leader>sN` to see notification history.
-
-3. **Words highlight:** Move cursor over a variable name. Observe all occurrences in
-   the buffer highlight. This is `snacks.words` layering with LSP document highlight.
-
-4. **Try mini.ai:** In any file with nested brackets, press `vi)` to select inside
-   parens, then try `vib` to auto-detect the bracket type. Try `vinq` to select inside
-   the *next* quote.
-
-5. **Which-key exploration:** Press `<leader>` and wait. Browse the groups. Explore
-   `<leader>s` for all search commands.
+1.  **View an image:** Open a markdown file with an image link and move your cursor over it.
+2.  **Toggle zen mode:** Press `<leader>z` for a distraction-free view (via `snacks.zen`).
+3.  **Search marks:** Press `<leader>sm` to open the Snacks picker for marks.
+4.  **Try mini.ai:** Use `vi)` to select inside parens, then `vib` to let it auto-detect the bracket type.
+5.  **Which-key exploration:** Press `<leader>` and wait. Explore the `[M]arkdown` and `[I]mage` groups.
+eader>s` for all search commands.

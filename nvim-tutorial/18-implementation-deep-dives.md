@@ -1,7 +1,7 @@
 # 18 — Under the Hood: How Your Custom Code Actually Works
 
 This file explains the actual Lua implementations behind your most complex keymaps.
-Not the what — the *how*.
+Not the what — the _how_.
 
 ---
 
@@ -27,6 +27,7 @@ notation gets converted to backtick notation `` `done: 250310-1430` ``. Then it
 searches for which label is present to determine state.
 
 **State transitions:**
+
 - `has_done_index` present → go to "untoggled" state
 - `has_untoggled_index` present (but no done) → go back to "done" state
 - Neither → first completion: mark done, move to `## Completed Tasks`
@@ -44,6 +45,7 @@ end
 
 A "chunk" is the bullet line plus all continuation lines — lines that aren't blank and
 don't start a new bullet. This correctly handles:
+
 ```
 - [ ] Write the tutorial
   This is a continuation line that explains the task
@@ -56,16 +58,20 @@ don't start a new bullet. This correctly handles:
 ## NixOS Cross-Repo Sync: The Hard Link Strategy
 
 ### The Problem
-Nix Flakes require all imported files to be physically inside the git repository. However, your Neovim config (`nvimConfig`) and your NixOS environment (`NixOSenv`) are separate repositories.
+
+Nix Flakes require all imported files to be physically inside the git repository. However, your Neovim config (`nvim`) and your NixOS environment (`NixOSenv`) are separate repositories.
 
 1.  **Symlinks** fail because Nix sees the absolute path and blocks it in "pure" mode.
 2.  **Rsync** requires a manual trigger.
 
 ### The Solution: Hard Linking
+
 ```bash
 ln /home/qwerty/NixOSenv/nvim.nix /home/qwerty/nvimConfig/nvim.nix
 ```
+
 A hard link makes the two files point to the same **inode** on the disk. To the operating system (and Nix), they are the exact same file.
+
 - **Instant Sync**: Saving in `nvim-config` updates `NixOSenv` bit-for-bit immediately.
 - **Pure Build**: Nix evaluates it as a local file, satisfying the "Pure Evaluation" safety checks.
 
@@ -76,6 +82,7 @@ A hard link makes the two files point to the same **inode** on the disk. To the 
 While Snacks.nvim handles simple Mermaid diagrams, professional UML (PlantUML) requires a more robust engine and browser-based rendering for complex layouts.
 
 ### Workflow Logic
+
 1.  **Buffer Identification**: `plantuml.lua` uses a `FileType` autocmd to detect `.puml` files.
 2.  **Execution Stack**:
     - **aklt/plantuml-syntax**: Provides high-performance Vim-native highlighting.
@@ -88,7 +95,9 @@ While Snacks.nvim handles simple Mermaid diagrams, professional UML (PlantUML) r
     - Subsequent saves trigger a background recomps and the HTML auto-refreshes using local polling or web sockets.
 
 ### NixOS Dependencies
+
 Required in `nvim.nix`:
+
 - `plantuml`: The diagram engine.
 - `graphviz`: Required by PlantUML for non-trivial layouts.
 - `jdk`: The Java environment required to run the PlantUML `.jar`.
@@ -96,6 +105,7 @@ Required in `nvim.nix`:
 ### The move operation
 
 When completing a task for the first time:
+
 1. The chunk is removed from its current position with `table.remove`
 2. The entire `lines` table is searched for `## Completed Tasks`
 3. The chunk is inserted immediately after the heading (top of the completed list)
@@ -135,6 +145,7 @@ The URL extractor faces a real parsing problem: markdown link syntax is
 but the outer `)` closes the markdown link and shouldn't be part of the URL.
 
 The solution:
+
 1. Strip common trailing punctuation in a loop
 2. Count open `(` vs close `)` in the remaining URL
 3. If there are more closing parens than opening, the last `)` is the markdown closer,
@@ -164,6 +175,7 @@ end
 `string.find` returns start and end indices. The loop advances by passing `e + 1` as
 the search start. When a match straddles the cursor column (`s <= col <= e`), it
 wraps that specific URL in backticks by slicing the line into three parts:
+
 - `line[1..s-1]` — before the URL
 - `` `url` `` — the URL in backticks
 - `line[e+1..]` — after the URL
@@ -197,8 +209,9 @@ This is real treesitter query parsing. The `@h1`...`@h6` captures return `id` va
 same-level heading. The "next same-level" part is useful when navigating between sibling
 sections of a document.
 
-`<C-CR>` (Emacs-style heading insert) — uses the same context to determine *where* to
+`<C-CR>` (Emacs-style heading insert) — uses the same context to determine _where_ to
 insert a new heading. Logic:
+
 1. Get current heading level
 2. Find `next_same_line` — the next heading at the same level
 3. If a higher-level heading comes first, insert before that
@@ -228,6 +241,7 @@ end
 
 This is a Jekyll-specific tool. Your blog posts use `{% include embed/youtube.html id=... %}`
 template tags. The processor:
+
 1. Scans the file tracking which `##` section it's in
 2. Collects all YouTube embeds that aren't already in protected sections
 3. Removes them from their current positions
@@ -254,6 +268,7 @@ vim.cmd 'loadview'
 ```
 
 The flow:
+
 1. `mkview` — save fold state
 2. Insert `## Contents`, `### Table of contents`, `<!-- toc -->` if not present
 3. Write to disk (markdown-toc needs the current content)
@@ -277,8 +292,8 @@ local bold_start = left_text:reverse():find '%*%*'
 if bold_start then bold_start = col - bold_start end
 ```
 
-To find the opening `**` to the *left* of cursor, it reverses the substring from line
-start to cursor and searches from the beginning — this finds the *nearest* `**` to the
+To find the opening `**` to the _left_ of cursor, it reverses the substring from line
+start to cursor and searches from the beginning — this finds the _nearest_ `**` to the
 left. The position is then translated back to the original coordinate system with
 `col - bold_start`.
 
@@ -299,6 +314,7 @@ end
 
 It extends `right_text` line by line until it finds `**` or hits a blank line. This
 correctly handles multiline bold like:
+
 ```
 **This is a bold phrase
 that spans two lines**
@@ -356,6 +372,7 @@ the space following the bracket — ready for you to type or continue. The colum
 
 The pattern `'^([%s]*[-*]%s+)(.*)'$` captures indentation + bullet character + spacing
 as `bullet`, then the rest as `text`. This preserves indentation on nested bullets:
+
 ```
   - item        →    - [ ] item
 ^^^ preserved
