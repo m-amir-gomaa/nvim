@@ -110,25 +110,6 @@ return {
 
 		-- Treesitter textobjects
 		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true, -- jump forward to textobject automatically
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
-					["aa"] = "@parameter.outer",
-					["ia"] = "@parameter.inner",
-					["ab"] = "@block.outer",
-					["ib"] = "@block.inner",
-					-- Added based on advanced workflows for sigs/returns
-					["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-					["is"] = { query = "@scope", query_group = "locals", desc = "Select language scope inner" },
-					["ar"] = "@return.outer",
-					["ir"] = "@return.inner",
-				},
-			},
 			move = {
 				enable = true,
 				set_jumps = true,

@@ -20,6 +20,12 @@ map("n", "bp", ":bp<CR>", { silent = true })
 map("n", "b^", ":b#<CR>", { silent = true })
 map("n", "bk", ":bd<CR>", { silent = true })
 
+-- Resize windows with holding Alt + hjkl
+map("n", "<M-k>", "<cmd>resize +2<CR>", { desc = "Increase Window Height" })
+map("n", "<M-j>", "<cmd>resize -2<CR>", { desc = "Decrease Window Height" })
+map("n", "<M-h>", "<cmd>vertical resize -2<CR>", { desc = "Decrease Window Width" })
+map("n", "<M-l>", "<cmd>vertical resize +2<CR>", { desc = "Increase Window Width" })
+
 -- Move lines up and down in visual mode
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "[P]Move line down in visual mode" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "[P]Move line up in visual mode" })

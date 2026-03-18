@@ -44,19 +44,22 @@ to the `ensure_installed` list and rebuild your system with `nr`.
 
 ---
 
-## Treesitter Textobjects
+## Textobjects (mini.ai + Treesitter)
 
-Textobjects allow you to operate on syntactic units like functions or classes
-instead of just lines or words.
+Textobjects allow you to operate on structural units instead of just lines or words. 
 
-| Key | Action |
-|-----|--------|
-| `af` / `if` | Around/inside function |
-| `ac` / `ic` | Around/inside class |
-| `aa` / `ia` | Around/inside parameter |
-| `ab` / `ib` | Around/inside block |
-| `as` / `is` | Around/inside language scope (advanced) |
-| `ar` / `ir` | Around/inside return statement |
+*Note: All "Around/Inside" textobjects below are powered by `mini.ai` under the hood. It natively handles brackets/quotes and relies on Treesitter to understand functions, classes, and scopes without any conflicts.*
+
+| Key | Source | Action |
+|-----|--------|--------|
+| `ab` / `ib` | `mini.ai` | Around/inside any bracket `()`, `[]`, `{}` |
+| `aq` / `iq` | `mini.ai` | Around/inside any quote `'`, `"`, `` ` `` |
+| `af` / `if` | `treesitter` | Around/inside function |
+| `ac` / `ic` | `treesitter` | Around/inside class |
+| `aa` / `ia` | `treesitter` | Around/inside parameter |
+| `aB` / `iB` | `treesitter` | Around/inside block |
+| `as` / `is` | `treesitter` | Around/inside language scope (advanced) |
+| `ar` / `ir` | `treesitter` | Around/inside return statement |
 
 **Using them with operators:**
 

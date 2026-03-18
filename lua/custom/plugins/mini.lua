@@ -9,7 +9,19 @@ return {
 		--  - va)  - [V]isually select [A]round [)]paren
 		--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
 		--  - ci'  - [C]hange [I]nside [']quote
-		require("mini.ai").setup({ n_lines = 500 })
+		local ai = require("mini.ai")
+		ai.setup({
+			n_lines = 500,
+			custom_textobjects = {
+				-- Code structure via treesitter (mini.ai is the gatekeeper for a/i)
+				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+				a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+				B = ai.gen_spec.treesitter({ a = "@block.outer", i = "@block.inner" }),
+				s = ai.gen_spec.treesitter({ a = "@scope.outer", i = "@scope.inner" }),
+				r = ai.gen_spec.treesitter({ a = "@return.outer", i = "@return.inner" }),
+			},
+		})
 
 		-- Add/delete/replace surroundings (brackets, quotes, etc.)
 		--

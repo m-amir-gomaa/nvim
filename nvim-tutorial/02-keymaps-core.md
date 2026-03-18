@@ -28,6 +28,10 @@ These are in `init.lua` and use the tmux-compatible `<C-w><C-h>` form (works bot
 and without tmux navigator). The `<C-hjkl>` pattern mirrors your normal hjkl movement
 and makes split navigation feel like extended cursor movement.
 
+> **Window Resizing:**
+> - `<M-k>` / `<M-j>` — increase / decrease split height
+> - `<M-h>` / `<M-l>` — decrease / increase split width
+>
 > **All the `<C-w>` commands you probably don't use:**
 >
 > - `<C-w>=` — equalise all split sizes

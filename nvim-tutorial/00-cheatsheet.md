@@ -26,6 +26,9 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `bn` / `bp`   | Next / previous buffer  |
 | `b^`          | Alternate (last) buffer |
 | `bk`          | Delete current buffer   |
+| `<M-h/l>`     | Decrease/increase width|
+| `<M-j/k>`     | Decrease/increase height|
+| `<C-w> =`     | Equalise all split sizes|
 
 ## Telescope
 
@@ -149,17 +152,21 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>sp` | Swap parameter next                |
 | `<leader>sP` | Swap parameter prev                |
 
-## Treesitter Navigation & Textobjects
+## Textobjects & Navigation (mini.ai + treesitter)
 
-| Key         | Action                     |
-| ----------- | -------------------------- |
-| `af` / `if` | Around/inside function     |
-| `ac` / `ic` | Around/inside class        |
-| `aa` / `ia` | Around/inside parameter    |
-| `ab` / `ib` | Around/inside block        |
-| `]f` / `[f` | Next/prev function         |
-| `]c` / `[c` | Next/prev class            |
-| `[x`        | Jump to treesitter context |
+_Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've integrated Treesitter structural objects directly into it to avoid conflicts._
+
+| Key         | Source                 | Action                                    |
+| ----------- | ---------------------- | ----------------------------------------- |
+| `ab` / `ib` | `mini.ai`              | Around/inside any bracket `()`, `[]`, `{}`|
+| `aq` / `iq` | `mini.ai`              | Around/inside any quote `'`, `"`, `` ` `` |
+| `af` / `if` | `treesitter`           | Around/inside function                    |
+| `ac` / `ic` | `treesitter`           | Around/inside class                       |
+| `aa` / `ia` | `treesitter`           | Around/inside parameter                   |
+| `aB` / `iB` | `treesitter`           | Around/inside block                       |
+| `]f` / `[f` | `treesitter`           | Next/prev function                        |
+| `]c` / `[c` | `treesitter`           | Next/prev class                           |
+| `[x`        | `treesitter-context`   | Jump to treesitter context                |
 
 ## vim-surround
 
