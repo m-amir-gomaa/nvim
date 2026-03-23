@@ -299,6 +299,7 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>vz`  | Avante: Zen Mode Toggle         |
 | `<leader>vh`  | Avante: Select History          |
 | `<leader>vS`  | Avante: Stop Generation         |
+| `<leader>v.`  | Avante: Add current buffer      |
 | `<leader>vB`  | Avante: Add all open buffers    |
 | `<leader>v?`  | Avante: Select Model            |
 | `<leader>vo`  | Avante Diff: Accept Ours        |
