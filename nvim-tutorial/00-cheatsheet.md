@@ -283,3 +283,21 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>mb` | Bold selection               |
 | `<leader>mx` | Strikethrough selection      |
 | `gss`        | Surround with backticks      |
+
+## AI & Titan Features
+
+| Key          | Source | Action                                  |
+| ------------ | ------ | --------------------------------------- |
+| `<leader>xl` | Luai   | Execute Lua file                        |
+| `<leader>xx` | Luai   | Execute Lua line                        |
+| `co` / `ct`  | Avante | Diff: Choose Ours / Theirs              |
+| `ca` / `cb`  | Avante | Diff: All Theirs / Both                 |
+| `cc`         | Avante | Diff: Choose Cursor                     |
+| `]x` / `[x`  | Avante | Diff: Next / Prev Conflict              |
+| `<M-l>`      | Avante | Suggestions: Accept                     |
+| `<M-y>`      | Avante | Suggestions: Confirm                    |
+| `<M-i>`      | Avante | Suggestions: Dismiss                    |
+| `<M-]>`      | Avante | Suggestions: Next                       |
+| `<M-[>`      | Avante | Suggestions: Prev                       |
+| `A` / `a`    | Avante | Sidebar: Apply All / Apply Cursor       |
+| `<CR>`       | Avante | Diff: Submit                            |
