@@ -87,7 +87,6 @@ return {
 			"markdown_inline",
 			"mermaid",
 			"nix",
-			"norg",
 			"python",
 			"query",
 			"regex",
