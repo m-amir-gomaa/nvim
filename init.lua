@@ -143,6 +143,7 @@ require("lazy").setup({
 
 -- [[ Keybinding modules ]]
 require("custom.keybindings.mappings")
+require("custom.filetype")
 require("custom.keybindings.extras.folding_section")
 require("custom.keybindings.extras.extra_keybindings_linkarzu")
 require("custom.keybindings.extras.image")
