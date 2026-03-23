@@ -288,18 +288,27 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 
 | Key           | Source | Action                                  |
 | ------------- | ------ | --------------------------------------- |
-| `<leader>vl`  | Luai   | Execute Lua file                        |
-| `<leader>vx`  | Luai   | Execute Lua line                        |
-| `<leader>vo`  | Avante | Diff: Choose Ours                       |
-| `<leader>vt`  | Avante | Diff: Choose Theirs                     |
-| `<leader>va`  | Avante | Diff: All Theirs                        |
-| `<leader>vb`  | Avante | Diff: Both                              |
-| `<leader>vc`  | Avante | Diff: Choose Cursor                     |
-| `]a` / `[a`   | Avante | Diff: Next / Prev Conflict              |
-| `<M-g>`       | Avante | Suggestions: Accept                     |
-| `<M-y>`       | Avante | Suggestions: Confirm                    |
-| `<M-n>`       | Avante | Suggestions: Dismiss                    |
-| `<M-]>`       | Avante | Suggestions: Next                       |
-| `<M-[>`       | Avante | Suggestions: Prev                       |
-| `A` / `a`     | Avante | Sidebar: Apply All / Apply Cursor       |
-| `<CR>`        | Avante | Diff: Submit                            |
+| `<leader>va`  | Avante: Ask / Chat              |
+| `<leader>ve`  | Avante: Edit selection          |
+| `<leader>vv`  | Avante: Toggle Sidebar          |
+| `<leader>vs`  | Avante: Toggle Suggestions      |
+| `<leader>vr`  | Avante: Refresh                 |
+| `<leader>vR`  | Avante: Repo Map Toggle         |
+| `<leader>vH`  | Avante: Hint Toggle             |
+| `<leader>vC`  | Avante: Context Toggle          |
+| `<leader>vz`  | Avante: Zen Mode Toggle         |
+| `<leader>vh`  | Avante: Select History          |
+| `<leader>vS`  | Avante: Stop Generation         |
+| `<leader>vB`  | Avante: Add all open buffers    |
+| `<leader>v?`  | Avante: Select Model            |
+| `<leader>vo`  | Avante Diff: Accept Ours        |
+| `<leader>vt`  | Avante Diff: Accept Theirs      |
+| `<leader>vA`  | Avante Diff: Accept All Theirs  |
+| `[a` / `]a`   | Avante: Prev/Next conflict      |
+| `<leader>vl`  | Luai: Execute Lua file          |
+| `<leader>vx`  | Luai: Execute Lua line          |
+| `<M-g>`       | Avante: Accept suggestion       |
+| `<M-n>`       | Avante: Dismiss suggestion      |
+| `<M-]>` / `<M-[>`| Avante: Next / Prev suggestion|
+| `A` / `a`     | Avante Sidebar: Apply All / Cur |
+| `<CR>`        | Avante: Submit prompt           |
