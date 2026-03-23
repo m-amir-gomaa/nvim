@@ -30,6 +30,7 @@ built, including the parts that feel unexplored.
 | [20-advanced-workflow.md](20-advanced-workflow.md) | How to put it all together into a fast development loop |
 | [21-nix-on-any-os.md](21-nix-on-any-os.md) | Using Nix to manage tools on macOS, WSL, and other Linux distros |
 | [22-ai-features.md](22-ai-features.md) | AI integrated via Titan Gateway (Avante, MCP Hub, Luai) |
+| [23-titan-architecture.md](23-titan-architecture.md) | Titan Gateway Architecture & Mermaid Diagrams |
 
 ---
 

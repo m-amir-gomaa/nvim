@@ -29,6 +29,11 @@ This configuration is tightly integrated with **NixOS**.
 - **Sync**: `nvim.nix` is hard-linked between `~/nvim` and `~/NixOSenv` for seamless editing and immediate availability in both repositories.
 - **Rebuild**: Apply changes with the `nr` command.
 
+## Titan Gateway Integration
+This configuration is tightly integrated with [Titan Gateway](file:///home/qwerty/TitanGateway), a sovereign agentic hub for local tools and AI interaction.
+- **Architecture**: See the [Titan Architecture & Cognitive Loop](file:///home/qwerty/nvim/nvim-tutorial/23-titan-architecture.md) for Mermaid diagrams and a deep dive into how the system works.
+- **Features**: Integrated via `avante.nvim` and `mcphub.nvim`.
+
 ## Keybindings (New)
 - `<leader>dv`: [D]iagram [V]iew (Open browser preview for PlantUML)
 - `<leader>ds`: [D]iagram [S]ave (Save diagram as image)
