@@ -16,7 +16,7 @@ graph TD
     end
     
     subgraph Core_Layer ["Agentic Core Layer"]
-        Loop[Async Agent Loop]
+        TitanCore[Async Agent Loop]
         Persistence[Session/State Saver]
         Trimmer[Context Token Trimmer]
     end
@@ -28,11 +28,11 @@ graph TD
         Orch[Learning OS Bridge]
     end
     
-    TUI --> Loop
-    Loop --> Gate
-    Loop --> Tool_Layer
-    Loop --> Persistence
-    Loop --> Trimmer
+    TUI --> TitanCore
+    TitanCore --> Gate
+    TitanCore --> Tool_Layer
+    TitanCore --> Persistence
+    TitanCore --> Trimmer
 ```
 
 ---
@@ -44,19 +44,19 @@ The Core Loop follows a "Reason -> Propose -> Approve -> Execute" cycle. No syst
 ```mermaid
 sequenceDiagram
     participant Agent as Agent Core
-    participant Loop as Cognitive Loop
+    participant TitanCore as Cognitive Loop
     participant Gate as Action Gate (TUI)
     participant User as User
     participant Tools as Local Tools
 
-    Loop->>Agent: Propose Tools [A, B, C]
+    TitanCore->>Agent: Propose Tools [A, B, C]
     Agent->>Gate: Push Approval Modal
     Gate->>User: Display Tool Batch & CLI
     User-->>Gate: Approve ALL [Y]
     Gate->>Agent: AUTHORIZED
     Agent->>Tools: Dispatch Parallel (asyncio.gather)
     Tools-->>Agent: Results [Ra, Rb, Rc]
-    Agent->>Loop: Feedback Results
+    Agent->>TitanCore: Feedback Results
 ```
 
 ### Key Features of the Loop:
