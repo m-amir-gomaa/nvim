@@ -1018,6 +1018,14 @@ end, { desc = "[P]TODO toggle item done or not" })
 -- https://youtu.be/BVyrXsZ_ViA
 --
 -- Generate/update a Markdown TOC
+-- Toggle diagnostics in the current buffer (Markdown focus)
+-- This allows hiding linting errors specifically while writing prose
+vim.keymap.set("n", "<leader>me", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+	local status = vim.diagnostic.is_enabled({ bufnr = bufnr }) and "enabled" or "disabled"
+	vim.notify("Buffer diagnostics " .. status, vim.log.levels.INFO)
+end, { desc = "[P]Markdown: Toggle diagnostics in buffer" })
 -- To generate the TOC I use the markdown-toc plugin
 -- https://github.com/jonschlinkert/markdown-toc
 -- And the markdown-toc plugin installed as a LazyExtra

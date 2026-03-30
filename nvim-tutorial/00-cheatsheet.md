@@ -284,7 +284,7 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>mx` | Strikethrough selection      |
 | `gss`        | Surround with backticks      |
 
-## AI & Titan Features
+## AI & Features
 
 | Key           | Source | Action                                  |
 | ------------- | ------ | --------------------------------------- |

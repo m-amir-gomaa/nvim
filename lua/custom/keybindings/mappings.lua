@@ -58,6 +58,13 @@ map("v", "gl", "$h", { desc = "[P]Go to the end of the line" })
 -- Plugin toggles / utils
 map("n", "<leader><leader>u", ":UndotreeToggle<CR>", { silent = true })
 
+-- Toggle diagnostics (global)
+map("n", "<leader>te", function()
+	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+	local status = vim.diagnostic.is_enabled() and "enabled" or "disabled"
+	vim.notify("Diagnostics " .. status, vim.log.levels.INFO)
+end, { desc = "[P]Toggle Diagnostics" })
+
 -- Rustacean keymaps — scoped to Rust buffers only via FileType autocmd
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rust",

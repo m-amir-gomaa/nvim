@@ -32,8 +32,15 @@ return {
 		local telescopeConfig = require("telescope.config")
 		local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
 		table.insert(vimgrep_arguments, "--hidden")
+		table.insert(vimgrep_arguments, "--no-ignore")
 		table.insert(vimgrep_arguments, "--glob")
 		table.insert(vimgrep_arguments, "!**/.git/*")
+		table.insert(vimgrep_arguments, "--glob")
+		table.insert(vimgrep_arguments, "!**/target/*")
+		table.insert(vimgrep_arguments, "--glob")
+		table.insert(vimgrep_arguments, "!**/.venv/*")
+		table.insert(vimgrep_arguments, "--glob")
+		table.insert(vimgrep_arguments, "!**/node_modules/*")
 		table.insert(vimgrep_arguments, "-L")
 		-- [[ Configure Telescope ]]
 		-- See `:help telescope` and `:help telescope.setup()`
@@ -57,7 +64,20 @@ return {
 				find_files = {
 					theme = "ivy",
 					-- find_command must be inside find_files, not at pickers level
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+					find_command = {
+						"rg",
+						"--files",
+						"--hidden",
+						"--no-ignore",
+						"--glob",
+						"!**/.git/*",
+						"--glob",
+						"!**/target/*",
+						"--glob",
+						"!**/.venv/*",
+						"--glob",
+						"!**/node_modules/*",
+					},
 				},
 			},
 			extensions = {
@@ -133,6 +153,15 @@ return {
 					return vim.iter({
 						args,
 						{
+							"--no-ignore",
+							"--glob",
+							"!**/.git/*",
+							"--glob",
+							"!**/target/*",
+							"--glob",
+							"!**/.venv/*",
+							"--glob",
+							"!**/node_modules/*",
 							"--color=never",
 							"--no-heading",
 							"--with-filename",
@@ -214,8 +243,15 @@ return {
 							"--column",
 							"--smart-case",
 							"--hidden",
+							"--no-ignore",
 							"--glob",
 							"!**/.git/*",
+							"--glob",
+							"!**/target/*",
+							"--glob",
+							"!**/.venv/*",
+							"--glob",
+							"!**/node_modules/*",
 						},
 					})
 						:flatten()

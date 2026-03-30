@@ -29,8 +29,8 @@ built, including the parts that feel unexplored.
 | [19-terminal.md](19-terminal.md) | Floating terminal — toggle, terminal mode, configuration |
 | [20-advanced-workflow.md](20-advanced-workflow.md) | How to put it all together into a fast development loop |
 | [21-nix-on-any-os.md](21-nix-on-any-os.md) | Using Nix to manage tools on macOS, WSL, and other Linux distros |
-| [22-ai-features.md](22-ai-features.md) | AI integrated via Titan Gateway (Avante, MCP Hub, Luai) |
-| [23-titan-architecture.md](23-titan-architecture.md) | Titan Gateway Architecture & Mermaid Diagrams |
+| [22-ai-features.md](22-ai-features.md) | AI integrated via Mark (Avante, MCP Hub, Luai) |
+| [23-mark-architecture.md](23-mark-architecture.md) | Mark Architecture & Mermaid Diagrams |
 
 ---
 
@@ -49,7 +49,7 @@ built, including the parts that feel unexplored.
 → New plugins: `trouble.nvim` (§15-16), `grug-far` (§15-16),
   `treesitter-context` + `textobjects` (§05), `friendly-snippets` (§04), expanded
   `snacks.nvim` modules like **Image (Kitty Protocol)**, **Mermaid/UML**, and **LaTeX Math Rendering** (§11/13),
-  and **AI integrated via Titan Gateway** (§22).
+  and **AI integrated via Mark** (§22).
 
 **"I want to understand the Lua behind a keymap"**
 → `18-implementation-deep-dives.md`
