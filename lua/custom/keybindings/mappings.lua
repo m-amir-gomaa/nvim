@@ -110,3 +110,17 @@ map("n", "<leader>x", function()
 	end
 	vim.api.nvim_set_current_line(line)
 end, { desc = "Toggle markdown task completion" })
+
+-- OpenCode (Coding Specialist) - Claude Mirror Mode
+local oc_sync = require("custom.opencode_sync")
+map("n", "<leader>ll", function() oc_sync.launch_hyper_optimal("") end, { desc = "[L]LM: Claude-Style Chat" })
+map("n", "<leader>lt", function() oc_sync.launch_hyper_optimal("/test") end, { desc = "[L]LM: Run Tests (/test)" })
+map("n", "<leader>lr", function() oc_sync.launch_hyper_optimal("/review") end, { desc = "[L]LM: Review Changes (/review)" })
+map("n", "<leader>lb", function() oc_sync.launch_hyper_optimal("/bug ") end, { desc = "[L]LM: Fix Bug (/bug)" })
+map("n", "<leader>lk", function() oc_sync.launch_hyper_optimal("/compact") end, { desc = "[L]LM: Compact Context (/compact)" })
+map("n", "<leader>lq", function() oc_sync.launch_hyper_optimal("/query ") end, { desc = "[L]LM: Learning OS Query (/query)" })
+
+map("n", "<leader>la", "<cmd>OpenCodeAsk<cr>", { desc = "[L]LM: Quick Ask" })
+map("n", "<leader>le", "<cmd>OpenCodeEdit<cr>", { desc = "[L]LM: Direct Edit" })
+map("n", "<leader>lc", "<cmd>OpenCodeAddBuffer<cr>", { desc = "[L]LM: Add Buffer to Context" })
+

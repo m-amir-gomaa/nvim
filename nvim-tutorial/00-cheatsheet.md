@@ -226,64 +226,6 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>nd` | Dismiss notifications   |
 | `<leader>si` | Paste image (pick file) |
 
-## Markdown (normal mode)
-
-| Key            | Action                                         |
-| -------------- | ---------------------------------------------- |
-| `<leader>x`    | Toggle checkbox                                |
-| `<M-x>`        | Smart task toggle + move to done               |
-| `<M-l>`        | Create/convert to task                         |
-| `<M-a>`        | Paste image from clipboard                     |
-| `<M-1>`        | Paste image to assets dir                      |
-| `<M-i>`        | Upload image to Imgur                          |
-| `zj`           | Fold H1+ headings                              |
-| `zk`           | Fold H2+ headings                              |
-| `zl`           | Fold H3+ headings                              |
-| `z;`           | Fold H4+ headings                              |
-| `zu`           | Unfold all                                     |
-| `zi`           | Fold heading above cursor                      |
-| `vio`          | Select inside code block                       |
-| `<leader>ml`   | Copy all HTTPS links                           |
-| `<leader>mR`   | Restart Marksman LSP                           |
-| `<leader>mtt`  | Insert/update TOC (English)                    |
-| `<leader>mtg`  | Insert/update TOC (German)                     |
-| `<leader>mm`   | Jump to TOC                                    |
-| `<leader>mn`   | Return from TOC                                |
-| `<leader>md`   | Toggle bullet point                            |
-| `<leader>mb`   | Toggle bold (word / visual)                    |
-| `<leader>mx`   | Strikethrough (visual)                         |
-| `<leader>mfA`  | Format all markdown in repo                    |
-| `<leader>mfy`  | Move YouTube embeds                            |
-| `<leader>mT`   | Show heading context info                      |
-| `<C-CR>`       | Insert heading emacs-style                     |
-| `<leader>msle` | Spell: English                                 |
-| `<leader>mslg` | Spell: German                                  |
-| `<leader>mslb` | Spell: Both                                    |
-| `<leader>mss`  | Accept first spell suggestion                  |
-| `<leader>msg`  | Add word to spellfile                          |
-| `<leader>iR`   | Rename image under cursor                      |
-| `<leader>id`   | Delete image file                              |
-| `<leader>if`   | Open image in File Manager (ForkLift/Nautilus) |
-| `<leader>x`    | Toggle TODO: done state                        |
-| `<leader>ch`   | Obsidian: Toggle checkbox                      |
-| `gf`           | Obsidian: Follow link (passthrough)            |
-| `<leader>on`   | Obsidian: New note                             |
-| `<leader>oo`   | Obsidian: Open in Obsidian app                 |
-| `<leader>os`   | Obsidian: Search vault                         |
-| `<leader>mZ`   | Delete all marks                               |
-| `<leader>br`   | Reload current buffer                          |
-| `yd`           | Yank line + diagnostics                        |
-
-## Visual mode (markdown)
-
-| Key          | Action                       |
-| ------------ | ---------------------------- |
-| `y`          | Yank with prettier unwrap    |
-| `<leader>mj` | Delete newlines in selection |
-| `<leader>mb` | Bold selection               |
-| `<leader>mx` | Strikethrough selection      |
-| `gss`        | Surround with backticks      |
-
 ## AI & Features
 
 | Key           | Source | Action                                  |
@@ -313,3 +255,13 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<M-]>` / `<M-[>`| Avante: Next / Prev suggestion|
 | `A` / `a`     | Avante Sidebar: Apply All / Cur |
 | `<CR>`        | Avante: Submit prompt           |
+
+## OpenCode (Coding Specialist)
+
+| Key           | Action                                  |
+| ------------- | --------------------------------------- |
+| `<leader>ll`  | Toggle OpenCode Chat                    |
+| `<leader>la`  | OpenCode: Ask                           |
+| `<leader>le`  | OpenCode: Edit                          |
+| `<leader>lc`  | OpenCode: Add current buffer to context |
+| `<leader>ls`  | OpenCode: Select Model                  |

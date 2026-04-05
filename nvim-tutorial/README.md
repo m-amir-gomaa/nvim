@@ -29,7 +29,10 @@ built, including the parts that feel unexplored.
 | [19-terminal.md](19-terminal.md) | Floating terminal — toggle, terminal mode, configuration |
 | [20-advanced-workflow.md](20-advanced-workflow.md) | How to put it all together into a fast development loop |
 | [21-nix-on-any-os.md](21-nix-on-any-os.md) | Using Nix to manage tools on macOS, WSL, and other Linux distros |
-| [22-ai-features.md](22-ai-features.md) | AI integrated via Mark (Avante, MCP Hub, Luai) |
+| [22-ai-features.md](22-ai-features.md) | Mark (Sovereign Assistant) |
+| [24-mark-setup.md](24-mark-setup.md) | Mark Keys Setup |
+| [25-opencode-specialist.md](25-opencode-specialist.md) | OpenCode (Coding Specialist) |
+| [26-opencode-setup.md](26-opencode-setup.md) | OpenCode Keys Setup |
 | [23-mark-architecture.md](23-mark-architecture.md) | Mark Architecture & Mermaid Diagrams |
 
 ---
