@@ -265,3 +265,6 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>le`  | OpenCode: Edit                          |
 | `<leader>lc`  | OpenCode: Add current buffer to context |
 | `<leader>ls`  | OpenCode: Select Model                  |
+
+---
+[← Previous: AI Quickstart](AI_QUICKSTART.md) | [Home](README.md) | [Next: Core Options →](01-core-options.md)

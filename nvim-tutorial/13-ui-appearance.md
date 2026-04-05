@@ -152,3 +152,7 @@ Indent guides are provided by `indent-blankline.nvim` (in `indent_line.lua`).
 4.  **Try mini.ai:** Use `vi)` to select inside parens, then `vib` to let it auto-detect the bracket type.
 5.  **Which-key exploration:** Press `<leader>` and wait. Explore the `[M]arkdown` and `[I]mage` groups.
 eader>s` for all search commands.
+
+
+---
+[← Previous: Rust Workflow](12-rust-workflow.md) | [Home](README.md) | [Next: Editing Tools →](14-editing-tools.md)

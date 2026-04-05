@@ -133,3 +133,7 @@ which you prefer.
 
 ---
 
+
+
+---
+[← Previous: Editing Tools](14-editing-tools.md) | [Home](README.md) | [Next: Nix Tool Management →](17-nix-tool-management.md)

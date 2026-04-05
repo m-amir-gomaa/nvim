@@ -86,3 +86,7 @@ If you find yourself constantly running `cargo check`, consider adding `bacon` t
 1. **The "Action Hover"**: Open a Rust file, put your cursor on a `#[test]` and press `K`. Select "Run" from the menu.
 2. **Boilerplate generation**: Create a struct, then try to instantiate it without fields. Use `<leader>cr` and select "Fill struct fields."
 3. **Macro deep-dive**: Put your cursor on `vec![1, 2, 3]` and run `:RustLsp expandMacro`.
+
+
+---
+[← Previous: Markdown Workflow](11-markdown-workflow.md) | [Home](README.md) | [Next: UI & Appearance →](13-ui-appearance.md)

@@ -256,3 +256,7 @@ unlimited, persistent, non-linear edit history for every file.
 4. **Explore undo tree:** Make a series of edits, undo a few, make different edits,
    then open the undotree with `<leader>u` — observe the branching structure and
    navigate to an old state.
+
+
+---
+[← Previous: Git, Format, Debug](07-09-git-format-debug.md) | [Home](README.md) | [Next: Markdown Workflow →](11-markdown-workflow.md)

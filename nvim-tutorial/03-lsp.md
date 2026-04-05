@@ -238,3 +238,7 @@ The `luv` library entry adds `vim.uv` support (the libuv async bindings).
 
 5. **Trigger document highlight:** Open a file, hold your cursor still on a variable
    name for ~250ms. All other occurrences should highlight.
+
+
+---
+[← Previous: Keymaps Core](02-keymaps-core.md) | [Home](README.md) | [Next: Completion →](04-completion.md)

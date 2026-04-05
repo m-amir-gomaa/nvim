@@ -120,3 +120,7 @@ indentation → Neovim uses 2 spaces. No configuration needed.
 
 5. **Test autopairs:** In a code file, type `func(` and observe the closing `)` appears.
    Type `"` and observe `""`. Try `<BS>` inside an empty `()`.
+
+
+---
+[← Previous: UI & Appearance](13-ui-appearance.md) | [Home](README.md) | [Next: Search & Diagnostics →](15-16-search-diagnostics.md)

@@ -79,3 +79,7 @@ Instead of installing tools globally, you can have them appear **only when you e
    Then check if `:Telescope live_grep` works in Neovim.
 2. **The PATH Check**: Verify your Nix profile is leading your PATH:
    `echo $PATH | grep .nix-profile`
+
+
+---
+[← Previous: Advanced Workflow](20-advanced-workflow.md) | [Home](README.md) | [Next: AI Features →](22-ai-features.md)

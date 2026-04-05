@@ -96,3 +96,7 @@ floats). The title confirms what the floating window is at a glance.
 3. Run a long command (like `sleep 5 && echo done`), toggle the terminal closed with
    `<leader>tt`, keep editing, re-open with `<leader>tt` — the command finishes in
    the background and the output is there when you return.
+
+
+---
+[← Previous: Deep Dives](18-implementation-deep-dives.md) | [Home](README.md) | [Next: Advanced Workflow →](20-advanced-workflow.md)

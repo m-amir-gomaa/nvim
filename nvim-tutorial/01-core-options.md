@@ -297,3 +297,7 @@ large repos because it only fetches objects you actually need.
 
 4. **Inspect your listchars:** `:set list` toggles the visible whitespace characters.
    `:set nolist` turns it off again. Your config has `vim.o.list = true` by default.
+
+
+---
+[← Previous: Cheatsheet](00-cheatsheet.md) | [Home](README.md) | [Next: Keymaps Core →](02-keymaps-core.md)

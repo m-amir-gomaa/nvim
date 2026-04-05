@@ -137,3 +137,7 @@ If you find yourself with too much "junk" in the list, you can empty it with thi
 ```
 
 But remember: Telescope usually **replaces** your quickfix list every time you press `<C-q>`, so you don't strictly need to clear it manually before running a new search—it will just overwrite the old results!
+
+
+---
+[← Previous: Treesitter](05-treesitter.md) | [Home](README.md) | [Next: Git, Format, Debug →](07-09-git-format-debug.md)

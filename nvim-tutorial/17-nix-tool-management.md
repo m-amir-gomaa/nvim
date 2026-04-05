@@ -118,3 +118,7 @@ This is the single most important command for debugging your toolchain. It will 
 1. **The Discovery**: Open `~/NixOSenv/nvim.nix` and find where `pyright` is listed. 
 2. **The PATH Test**: Inside Neovim, run `:!which rust-analyzer`. Observe the long `/nix/store/...` path.
 3. **The Health Check**: Run `:checkhealth lspconfig` and see how it cleanly finds your system-provided binaries.
+
+
+---
+[← Previous: Search & Diagnostics](15-16-search-diagnostics.md) | [Home](README.md) | [Next: Deep Dives →](18-implementation-deep-dives.md)

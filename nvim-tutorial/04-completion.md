@@ -150,3 +150,7 @@ with `'prefer_rust_with_warning'` if you want maximum speed.
 
 5. **Force completion:** In insert mode with no context, press `<C-space>` to open the
    completion menu manually.
+
+
+---
+[← Previous: LSP](03-lsp.md) | [Home](README.md) | [Next: Treesitter →](05-treesitter.md)

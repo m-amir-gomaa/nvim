@@ -30,3 +30,7 @@ You can turn any markdown file into an interactive slideshow within Neovim.
 Tree-sitter is configured with advanced scope-level highlighting and text objects. On top of standard `af` (around function), you can use:
 - `as` / `is`: Select language scope (the precise syntax tree block).
 - `ar` / `ir`: Target function return statements instantly.
+
+
+---
+[← Previous: Terminal](19-terminal.md) | [Home](README.md) | [Next: Nix on Any OS →](21-nix-on-any-os.md)

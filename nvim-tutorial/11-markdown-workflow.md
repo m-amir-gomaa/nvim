@@ -375,3 +375,7 @@ Provides IDE-grade features for your notes:
 
 5. **Copy all links:** In a markdown file with several links, press `<leader>ml` and
    paste into another buffer — all URLs extracted.
+
+
+---
+[← Previous: File Navigation](10-file-navigation.md) | [Home](README.md) | [Next: Rust Workflow →](12-rust-workflow.md)

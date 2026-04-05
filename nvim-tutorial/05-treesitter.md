@@ -181,3 +181,7 @@ grammar.
 
 5. **Jump to context:** When inside a deeply nested block, press `[x` to jump to the
    enclosing function/class definition.
+
+
+---
+[← Previous: Completion](04-completion.md) | [Home](README.md) | [Next: Telescope →](06-telescope.md)

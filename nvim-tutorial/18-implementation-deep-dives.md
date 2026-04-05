@@ -377,3 +377,7 @@ as `bullet`, then the rest as `text`. This preserves indentation on nested bulle
   - item        →    - [ ] item
 ^^^ preserved
 ```
+
+
+---
+[← Previous: Nix Tool Management](17-nix-tool-management.md) | [Home](README.md) | [Next: Terminal →](19-terminal.md)

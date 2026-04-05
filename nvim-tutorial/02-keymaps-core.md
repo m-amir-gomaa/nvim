@@ -291,3 +291,7 @@ them, giving you clean flowing text. Smart.
 
 4. **Test the diagnostic yank:** Position on a line with an error, press `yd`, then
    paste into a terminal — you'll see the line + the full diagnostic message.
+
+
+---
+[← Previous: Core Options](01-core-options.md) | [Home](README.md) | [Next: LSP →](03-lsp.md)

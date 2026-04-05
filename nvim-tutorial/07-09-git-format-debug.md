@@ -293,3 +293,7 @@ Your configuration is "Nix-Native." Because `mason-nvim-dap` has been removed, y
 - **Python**: Uses the `debugpy` module from your system Python.
 
 > **Pro Tip:** If a debugger isn't starting, check your Nix configuration first—the binary must be available in the environment for `nvim-dap` to find it.
+
+
+---
+[← Previous: Telescope](06-telescope.md) | [Home](README.md) | [Next: File Navigation →](10-file-navigation.md)
