@@ -226,45 +226,7 @@ _Note: `mini.ai` handles standard surrounding text (brackets, quotes). We've int
 | `<leader>nd` | Dismiss notifications   |
 | `<leader>si` | Paste image (pick file) |
 
-## AI & Features
 
-| Key           | Source | Action                                  |
-| ------------- | ------ | --------------------------------------- |
-| `<leader>va`  | Avante: Ask / Chat              |
-| `<leader>ve`  | Avante: Edit selection          |
-| `<leader>vv`  | Avante: Toggle Sidebar          |
-| `<leader>vs`  | Avante: Toggle Suggestions      |
-| `<leader>vr`  | Avante: Refresh                 |
-| `<leader>vR`  | Avante: Repo Map Toggle         |
-| `<leader>vH`  | Avante: Hint Toggle             |
-| `<leader>vC`  | Avante: Context Toggle          |
-| `<leader>vz`  | Avante: Zen Mode Toggle         |
-| `<leader>vh`  | Avante: Select History          |
-| `<leader>vS`  | Avante: Stop Generation         |
-| `<leader>v.`  | Avante: Add current buffer      |
-| `<leader>vB`  | Avante: Add all open buffers    |
-| `<leader>v?`  | Avante: Select Model            |
-| `<leader>vo`  | Avante Diff: Accept Ours        |
-| `<leader>vt`  | Avante Diff: Accept Theirs      |
-| `<leader>vA`  | Avante Diff: Accept All Theirs  |
-| `[a` / `]a`   | Avante: Prev/Next conflict      |
-| `<leader>vl`  | Luai: Execute Lua file          |
-| `<leader>vx`  | Luai: Execute Lua line          |
-| `<M-g>`       | Avante: Accept suggestion       |
-| `<M-n>`       | Avante: Dismiss suggestion      |
-| `<M-]>` / `<M-[>`| Avante: Next / Prev suggestion|
-| `A` / `a`     | Avante Sidebar: Apply All / Cur |
-| `<CR>`        | Avante: Submit prompt           |
-
-## OpenCode (Coding Specialist)
-
-| Key           | Action                                  |
-| ------------- | --------------------------------------- |
-| `<leader>ll`  | Toggle OpenCode Chat                    |
-| `<leader>la`  | OpenCode: Ask                           |
-| `<leader>le`  | OpenCode: Edit                          |
-| `<leader>lc`  | OpenCode: Add current buffer to context |
-| `<leader>ls`  | OpenCode: Select Model                  |
 
 ---
-[← Previous: AI Quickstart](AI_QUICKSTART.md) | [Home](README.md) | [Next: Core Options →](01-core-options.md)
+[Home](README.md) | [Next: Core Options →](01-core-options.md)

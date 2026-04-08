@@ -252,7 +252,7 @@ vim.keymap.set('n', 'yd', function() ... end,
 
 Found in `extra_keybindings_linkarzu.lua`. Copies the current line _plus_ all diagnostic
 messages on it to your system clipboard — formatted nicely for pasting into a bug report
-or asking an AI assistant for help. This is a genuinely useful convenience.
+or for your reference. This is a genuinely useful convenience.
 
 ---
 

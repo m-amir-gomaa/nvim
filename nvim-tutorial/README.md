@@ -10,7 +10,6 @@ built, including the parts that feel unexplored.
 
 | File | Contents |
 |------|----------|
-| [AI_QUICKSTART.md](AI_QUICKSTART.md) | **Start Here**: Overview of the AI Workflow Triad |
 | [00-cheatsheet.md](00-cheatsheet.md) | Every keymap, one page |
 | [01-core-options.md](01-core-options.md) | `init.lua` options, diagnostics config, lazy bootstrap |
 | [02-keymaps-core.md](02-keymaps-core.md) | Hand-written keymaps and the reasoning behind them |
@@ -30,13 +29,6 @@ built, including the parts that feel unexplored.
 | [19-terminal.md](19-terminal.md) | Floating terminal — toggle, terminal mode, configuration |
 | [20-advanced-workflow.md](20-advanced-workflow.md) | How to put it all together into a fast development loop |
 | [21-nix-on-any-os.md](21-nix-on-any-os.md) | Using Nix to manage tools on macOS, WSL, etc |
-| [22-ai-features.md](22-ai-features.md) | Mark (Sovereign Assistant) Logic |
-| [23-architecture.md](23-architecture.md) | AI Architecture & Mermaid Diagrams |
-| [24-mark-setup.md](24-mark-setup.md) | Mark Keys Setup |
-| [25-opencode-specialist.md](25-opencode-specialist.md) | OpenCode (Coding Specialist) Logic |
-| [26-claude-mirror-setup.md](26-claude-mirror-setup.md) | OpenCode Keys Setup |
-| [HARDCORE_AI_STACK.md](HARDCORE_AI_STACK.md) | God-Mode OpenCode (MCP & Optimization) |
-| [99-sovereign-triad-workflow.md](99-sovereign-triad-workflow.md) | **Finale**: The complete Sovereign Engineering loop |
 
 ---
 
@@ -54,8 +46,7 @@ built, including the parts that feel unexplored.
 **"I want to understand what's new after the config fixes"**
 → New plugins: `trouble.nvim` (§15-16), `grug-far` (§15-16),
   `treesitter-context` + `textobjects` (§05), `friendly-snippets` (§04), expanded
-  `snacks.nvim` modules like **Image (Kitty Protocol)**, **Mermaid/UML**, and **LaTeX Math Rendering** (§11/13),
-  and **AI integrated via Mark** (§22).
+  `snacks.nvim` modules like **Image (Kitty Protocol)**, **Mermaid/UML**, and **LaTeX Math Rendering** (§11/13).
 
 **"I want to understand the Lua behind a keymap"**
 → `18-implementation-deep-dives.md`
@@ -67,7 +58,3 @@ built, including the parts that feel unexplored.
 Open any code file and press `]f` to jump to the next function, or `]h` to jump to the next git hunk.
 
 ---
-
-## 🔱 Sovereign Core Connections
-
-This tutorial covers the **Neovim** layer of the triad. For the underlying autonomous agentic architecture, technical protocols, and system-level configuration, refer to the **[Mark Master README](file:///home/qwerty/Mark/README.md)**.

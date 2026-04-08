@@ -82,4 +82,4 @@ Instead of installing tools globally, you can have them appear **only when you e
 
 
 ---
-[← Previous: Advanced Workflow](20-advanced-workflow.md) | [Home](README.md) | [Next: AI Features →](22-ai-features.md)
+[← Previous: Advanced Workflow](20-advanced-workflow.md) | [Home](README.md)

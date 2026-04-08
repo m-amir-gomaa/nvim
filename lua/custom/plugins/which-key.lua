@@ -67,8 +67,6 @@ return {
 			{ "[", group = "[[]Prev" },
 			{ "]", group = "[]]Next" },
 			{ "gs", group = "[G]lobal [S]urround" },
-			{ "<leader>l", group = "[L]LM / OpenCode" },
-			{ "<leader>v", group = "[V]irtual Assistant (AI)" },
 		},
 	},
 }

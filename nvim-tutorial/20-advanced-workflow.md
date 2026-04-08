@@ -10,11 +10,6 @@ This enables massive project-wide refactoring. Once the quickfix list is open, y
 :cfdo update
 ```
 
-## 2. Lua Scratchpads (`luai.nvim`)
-Instead of `print()` debugging Lua code, you can use `luai.nvim` to execute code segments instantly.
-- `<leader>xl`: Execute the entire current file.
-- `<leader>xx`: Execute the highlighted/current line.
-
 ## 3. Custom Statusline (`express_line.nvim`)
 The configuration utilizes `express_line.nvim`, a pure Lua, co-routine based statusline. This is significantly more customizable and performant than `lualine`, allowing for complex asynchronous git branch and diagnostic fetching without blocking the main thread.
 
