@@ -102,7 +102,7 @@ local function fold_headings_of_level(level)
 				if current_foldlevel > 0 then
 					-- Fold the heading if it matches the level
 					if vim.fn.foldclosed(line) == -1 then
-						vim.cmd.normal({ "za", bang = true })
+						pcall(vim.cmd.normal, { "za", bang = true })
 					end
 					-- else
 					--   vim.notify("No fold at line " .. line, vim.log.levels.WARN)
@@ -121,7 +121,7 @@ local function fold_headings_of_level(level)
 				if current_foldlevel > 0 then
 					-- Fold the heading if it matches the level
 					if vim.fn.foldclosed(line) == -1 then
-						vim.cmd.normal({ "za", bang = true })
+						pcall(vim.cmd.normal, { "za", bang = true })
 					end
 					-- else
 					--   vim.notify("No fold at line " .. line, vim.log.levels.WARN)
@@ -241,7 +241,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- - `normal!` executes the command in a "raw" mode, ignoring any mappings.
 			vim.cmd.normal({ "gk" })
 			-- This is to fold the line under the cursor
-			vim.cmd.normal({ "za", bang = true })
+			pcall(vim.cmd.normal, { "za", bang = true })
 			vim.cmd.normal({ "zz", bang = true }) -- center the cursor line on screen
 		end, "[P]Fold the heading cursor currently on")
 
@@ -250,7 +250,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<CR>", function()
 			local line = vim.fn.line(".")
 			if vim.fn.foldlevel(line) > 0 and vim.fn.foldclosed(line) ~= -1 or vim.fn.foldlevel(line) > 0 then
-				vim.cmd.normal({ "za", bang = true })
+				pcall(vim.cmd.normal, { "za", bang = true })
 				vim.cmd.normal({ "zz", bang = true })
 			else
 				-- Fall back to default behavior (moving down) if not on a fold

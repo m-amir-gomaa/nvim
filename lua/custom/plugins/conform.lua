@@ -31,20 +31,32 @@ return {
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			go = { "gofumpts" },
-			javascript = { "prettierd", "prettier" },
-			typescript = { "prettierd", "prettier" },
-			markdown = { "prettierd", "prettier" },
-			html = { "prettier" },
-			nix = { "nixpkgs-fmt", "nixfmt" },
-			python = { "black", "isort" }, -- added Python support
-			yaml = { "yamlfmt" },
-
-			-- Conform can also run multiple formatters sequentially
-			-- python = { "isort", "black" },
-			--
-			-- You can use 'stop_after_first' to run the first available formatter from the list
-			-- javascript = { "prettierd", "prettier", stop_after_first = true },
+			go = { "gofumpt", "goimports" },
+			-- Web development
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+			typescript = { "prettierd", "prettier", stop_after_first = true },
+			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+			svelte = { "prettierd", "prettier", stop_after_first = true },
+			vue = { "prettierd", "prettier", stop_after_first = true },
+			css = { "prettierd", "prettier", stop_after_first = true },
+			scss = { "prettierd", "prettier", stop_after_first = true },
+			less = { "prettierd", "prettier", stop_after_first = true },
+			html = { "prettierd", "prettier", stop_after_first = true },
+			json = { "prettierd", "prettier", stop_after_first = true },
+			jsonc = { "prettierd", "prettier", stop_after_first = true },
+			yaml = { "prettierd", "prettier", stop_after_first = true },
+			markdown = { "prettierd", "prettier", stop_after_first = true },
+			graphql = { "prettierd", "prettier", stop_after_first = true },
+			-- Systems & Scripting
+			sh = { "shfmt" },
+			bash = { "shfmt" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			rust = { "rustfmt" },
+			toml = { "taplo" },
+			nix = { "nixpkgs-fmt", "nixfmt", stop_after_first = true },
+			python = { "isort", "black" },
 		},
 	},
 } -- These are some examples, uncomment them if you want to see them work!

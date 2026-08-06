@@ -39,13 +39,33 @@
     # Treesitter parsers) are correctly linked on NixOS.
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins (p: [
-        p.scss
-        p.svelte
-        p.vue
-        # Essential ones to ensure they are available in the Nix store
+        p.bash
+        p.c
+        p.cpp
+        p.css
+        p.diff
+        p.dockerfile
+        p.go
+        p.html
+        p.javascript
+        p.json
+        p.latex
+        p.lua
         p.markdown
         p.markdown_inline
-        p.latex
+        p.nix
+        p.python
+        p.query
+        p.rust
+        p.scss
+        p.sql
+        p.svelte
+        p.toml
+        p.typescript
+        p.vim
+        p.vimdoc
+        p.vue
+        p.yaml
       ]))
     ];
 
@@ -104,9 +124,7 @@
       gcc # C compiler for Treesitter parser compilation
       gnumake # Build tool for compiling parsers
       git # Required for fetching parser sources
-      python313Packages.ddgs # Mark Web Search (formerly duckduckgo-search)
-      python313Packages.fastmcp # Mark MCP Framework
-      nodejs_24 # Required for MCPHub (mcp-hub-server)
+      nodejs_24 # Some LSPs and tools require Node
 
       # ── Snacks.nvim optional tools ────────────────────────────────────────
       lazygit # Snacks.lazygit integration

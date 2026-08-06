@@ -1,0 +1,90 @@
+
+==============================================================================
+blink.cmp:                                                                2 ⚠️
+
+System ~
+- ✅ OK curl is installed
+- ✅ OK git is installed
+- ✅ OK Your system is supported by pre-built binaries (x86_64-unknown-linux-gnu)
+- ⚠️ WARNING blink_cmp_fuzzy lib is not downloaded/built
+
+Sources ~
+- ⚠️ WARNING Some providers may show up as "disabled" but are enabled dynamically (e.g. cmdline)
+
+Default sources ~
+- lsp (blink.cmp.sources.lsp)
+- path (blink.cmp.sources.path)
+- snippets (blink.cmp.sources.snippets)
+- buffer (blink.cmp.sources.buffer)
+
+Cmdline sources ~
+- buffer (blink.cmp.sources.buffer)
+- cmdline (blink.cmp.sources.cmdline)
+
+Disabled sources ~
+- omni (blink.cmp.sources.complete_func)
+
+==============================================================================
+nvim-treesitter:                                                            ✅
+
+Requirements ~
+- ✅ OK Neovim was compiled with tree-sitter runtime ABI version 15 (required >=13).
+- ✅ OK tree-sitter-cli 0.26.8 (/nix/store/44rldadal7sqwlnmcskhgw10m7vvkcxj-tree-sitter-0.26.8/bin/tree-sitter)
+- ✅ OK tar 1.35.0 (/usr/bin/tar)
+- ✅ OK curl 8.18.0 (/run/current-system/sw/bin/curl)
+  curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.6.1 zlib/1.3.2 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.5 libssh2/1.11.1 nghttp2/1.67.1 ngtcp2/1.19.0 nghttp3/1.14.0 mit-krb5/1.22.1
+  Release-Date: 2026-01-07
+  Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt pop3 pop3s rtsp scp sftp smb smbs smtp smtps telnet tftp
+  Features: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTP3 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM PSL SPNEGO SSL threadsafe TLS-SRP UnixSockets zstd
+
+OS Info ~
+- release: 6.18.23
+- machine: x86_64
+- sysname: Linux
+- version: #1-NixOS SMP PREEMPT_DYNAMIC Sat Apr 18 08:45:02 UTC 2026
+
+Install directory for parsers and queries ~
+- /home/qwerty/.local/share/nvim/site
+- ✅ OK is writable.
+- ✅ OK is in runtimepath.
+
+Installed languages     H L F I J ~
+
+  Legend: [H]ighlights, [L]ocals, [F]olds, [I]ndents, In[J]ections ~
+
+==============================================================================
+vim.health:                                                                 ✅
+
+System Info ~
+- ✅ OK Up to date (0.12.2)
+- Nvim version: `v0.12.2` 
+- Operating system: Linux 6.18.23
+- Terminal: unknown
+- $TERM: dumb
+
+Configuration ~
+- ✅ OK no issues found
+
+Runtime ~
+- ✅ OK $VIMRUNTIME: /nix/store/72m082ncw4bqd9124sacc482kv5idfih-neovim-unwrapped-0.12.2/share/nvim/runtime
+
+Performance ~
+- ✅ OK Build type: Release
+
+Remote Plugins ~
+- ✅ OK Up to date
+
+Terminal ~
+- key_backspace (kbs) terminfo entry: `? (not found)`
+- key_dc (kdch1) terminfo entry: `? (not found)`
+
+External Tools ~
+- ✅ OK ripgrep 15.1.0 (/run/current-system/sw/bin/rg)
+- ✅ OK vim.ui.open: handler found (xdg-open)
+- ✅ OK git version 2.53.0 (/run/current-system/sw/bin/git)
+- ✅ OK curl 8.18.0 (/run/current-system/sw/bin/curl)
+  curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.6.1 zlib/1.3.2 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.5 libssh2/1.11.1 nghttp2/1.67.1 ngtcp2/1.19.0 nghttp3/1.14.0 mit-krb5/1.22.1
+  Release-Date: 2026-01-07
+  Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt pop3 pop3s rtsp scp sftp smb smbs smtp smtps telnet tftp
+  Features: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTP3 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM PSL SPNEGO SSL threadsafe TLS-SRP UnixSockets zstd
+

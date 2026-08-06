@@ -28,9 +28,19 @@ return {
 	--- @module 'blink.cmp'
 	--- @type blink.cmp.Config
 	opts = {
+		enabled = function()
+			-- Disable in picker input and prompt buffers to prevent <CR> hijacking
+			local ft = vim.bo.filetype
+			local buftype = vim.bo.buftype
+			if ft == "snacks_picker_input" or ft == "TelescopePrompt" or buftype == "prompt" then
+				return false
+			end
+			return vim.b.completion ~= false
+		end,
+
 		keymap = {
 			preset = "default",
-			["<CR>"] = { "accept", "fallback" },
+			["<CR>"] = { "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-l>"] = { "show_signature", "fallback" },

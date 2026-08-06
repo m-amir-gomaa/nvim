@@ -14,7 +14,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `J` (normal) | Join lines (cursor stays)        |
 | `n` / `N`    | Next/prev search match (centred) |
 | `<Esc>`      | Clear search highlight           |
-| `<CR>`       | Toggle Linkarzu-fold (Markdown)  |
+| `<CR>` (MD)  | Toggle fold (Markdown only)      |
 
 ## Windows & Tabs
 
@@ -34,9 +34,9 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 
 | Key                | Action                     |
 | ------------------ | -------------------------- |
-| `<leader>sf`       | Find files                 |
-| `<leader>sg`       | Live grep                  |
-| `<leader>sM`       | Multi-grep (pattern glob)  |
+| `<leader>sf`       | Find files (Telescope)     |
+| `<leader>sl`       | Search Labs (Telescope)    |
+| `<leader>sg`       | Live grep (Telescope)      |
 | `<leader>sw`       | Grep word under cursor     |
 | `<leader>sh`       | Search help                |
 | `<leader>sk`       | Search keymaps             |
@@ -75,7 +75,7 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<C-j>`   | Select next item          |
 | `<C-k>`   | Select previous item      |
 | `<C-l>`   | Toggle signature help     |
-| `<CR>`    | Accept completion         |
+| `<CR>`    | Fallback to Enter (Standard) |
 | `<C-e>`   | Close completion menu     |
 | `<C-spc>` | Manually open menu / docs |
 
@@ -148,9 +148,9 @@ A single-page cheatsheet of every keymap in your config, grouped by context.
 | `<leader>sG` | grug-far: project-wide             |
 | `<leader>su` | Replace word under cursor (global) |
 | `<leader>sU` | Replace with UPPERCASE             |
-| `<leader>sL` | Replace with lowercase             |
-| `<leader>sp` | Swap parameter next                |
-| `<leader>sP` | Swap parameter prev                |
+| `<leader>sL` | Replace with lowercase (conflict)|
+| `<leader>sp` | Swap parameter next        |
+| `<leader>sP` | Swap parameter prev        |
 
 ## Textobjects & Navigation (mini.ai + treesitter)
 

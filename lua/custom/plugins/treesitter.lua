@@ -1,11 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	-- Pinned to a stable tag — do NOT run :Lazy update on treesitter without
-	-- checking the changelog first. NixOS + auto_install can break on major bumps.
-	tag = "v0.9.3",
-	build = ":TSUpdate",
+	-- Track master for Neovim 0.12 compatibility.
+	-- NixOS users: nvim.nix handles the binary parsers; this only manages the Lua logic.
 	config = function(_, opts)
-		require("nvim-treesitter.configs").setup(opts)
+		require("nvim-treesitter").setup(opts)
 
 		-- Explicitly set jump and swap keymaps to ensure they take priority and have descriptions
 		local map = vim.keymap.set
@@ -64,16 +62,16 @@ return {
 	},
 	opts = {
 		ensure_installed = {
+			-- Parsers managed by Nix (see nvim.nix):
+			-- bash, c, cpp, go, latex, lua, markdown, markdown_inline,
+			-- python, query, rust, scss, svelte, vim, vimdoc, vue, yaml
+
 			"astro",
-			"bash",
-			"c",
 			"css",
-			"diff",
 			"dockerfile",
 			"eex",
 			"elixir",
 			"erlang",
-			"go",
 			"heex",
 			"html",
 			"java",
@@ -81,28 +79,15 @@ return {
 			"jq",
 			"json",
 			"kotlin",
-			"latex",
-			"lua",
-			"markdown",
-			"markdown_inline",
 			"mermaid",
 			"nix",
-			"python",
-			"query",
 			"regex",
 			"ruby",
-			"rust",
-			"scss",
-			"svelte",
 			"terraform",
 			"toml",
 			"tsx",
 			"typescript",
 			"typst",
-			"vim",
-			"vimdoc",
-			"vue",
-			"yaml",
 		},
 		auto_install = false, -- NixOS: parsers compile via :TSUpdate, not auto-download
 		highlight = {

@@ -28,7 +28,7 @@ return {
 			lint.linters_by_ft = {
 				markdown = { "markdownlint-cli2" },
 				lua = { "selene" },
-				go = { "golangci-lint" },
+				go = { "golangcilint" },
 				bash = { "shellcheck" },
 				sh = { "shellcheck" },
 				html = { "htmlhint" },
@@ -76,7 +76,8 @@ return {
 					-- avoid superfluous noise, notably within the handy LSP pop-ups that
 					-- describe the hovered symbol using Markdown.
 					if vim.bo.modifiable then
-						lint.try_lint()
+						-- Wrap in pcall to prevent errors if a linter is missing
+						pcall(lint.try_lint)
 					end
 				end,
 			})

@@ -29,10 +29,12 @@ This configuration is tightly integrated with **NixOS**.
 - **Sync**: `nvim.nix` is hard-linked between `~/nvim` and `~/NixOSenv` for seamless editing and immediate availability in both repositories.
 - **Rebuild**: Apply changes with the `nr` command.
 
-## Mark Gateway Integration
-This configuration is tightly integrated with [Mark Gateway](file:///home/qwerty/MarkGateway), a sovereign agentic hub for local tools and AI interaction.
-- **Architecture**: See the [Mark Architecture & Cognitive Loop](file:///home/qwerty/nvim/nvim-tutorial/23-mark-architecture.md) for Mermaid diagrams and a deep dive into how the system works.
-- **Features**: Integrated via `avante.nvim` and `mcphub.nvim`.
+## AI Integration
+- **codecompanion.nvim** — Chat & inline edit UI that shells out to `claude` CLI. No MCP, no WebSocket. Lightweight.
+  - `<leader>ac` — Toggle chat sidebar
+  - `<leader>ai` — Inline edit (visual/normal)
+  - `ga` — Action menu
+- **UTCP** (`~/.utcp/`) — Universal Tool Call Protocol bridge handles all tool execution at the Claude Code level. MCP-free within Neovim.
 
 ## Keybindings (New)
 - `<leader>dv`: [D]iagram [V]iew (Open browser preview for PlantUML)

@@ -98,9 +98,13 @@ return {
 			-- NOTE: rust_analyzer is intentionally omitted — rustaceanvim manages it exclusively.
 			-- Adding it here would cause double-attachment.
 			marksman = {},
-			markdown_oxide = {},
+			-- markdown_oxide: DISABLED — redundant with marksman; both are full
+			-- markdown LSPs (completions, definitions, references). Running both
+			-- simultaneously caused the reported UI hang on .md files.
+			-- markdown_oxide = {},
 			harper_ls = {
 				filetypes = { "markdown" },
+				settings = {}, -- Required by harper_ls to prevent "Settings must be an object" error
 			},
 
 			lua_ls = {
@@ -130,19 +134,15 @@ return {
 			},
 		}
 
-		-- Setup servers
+		-- Setup servers using the modern Neovim 0.11/0.12+ native API.
+		-- This bypasses the deprecated 'lspconfig' framework entirely while
+		-- still benefiting from the default configurations provided by the plugin.
 		for server_name, server_config in pairs(servers) do
 			server_config.capabilities =
 				vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
 
-			-- Neovim 0.11+ deprecates the 'require("lspconfig")[name].setup()' framework.
-			-- The new way is using vim.lsp.config and vim.lsp.enable.
-			if vim.fn.has("nvim-0.11") == 1 then
-				vim.lsp.config(server_name, server_config)
-				vim.lsp.enable(server_name)
-			else
-				require("lspconfig")[server_name].setup(server_config)
-			end
+			vim.lsp.config[server_name] = server_config
+			vim.lsp.enable(server_name)
 		end
 	end,
 }

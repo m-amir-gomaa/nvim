@@ -378,12 +378,16 @@ end, { desc = "[P]Rename image under cursor" })
 -- browser, etc
 if vim.g.simpler_scrollback ~= "deeznuts" then
 	vim.keymap.set("v", "y", function()
-		-- Check if the current buffer's filetype is markdown
-		if vim.bo.filetype ~= "markdown" then
-			-- Not a Markdown file, copy the selection to the system clipboard
+		-- Check if the current buffer's filetype is markdown and prettier is available
+		if vim.bo.filetype ~= "markdown" or vim.fn.executable("prettier") == 0 then
+			-- Not a Markdown file or prettier missing, copy the selection to the system clipboard
 			vim.cmd.normal({ '"+y', bang = true })
-			-- Optionally, notify the user
-			vim.notify("Yanked to system clipboard", vim.log.levels.INFO)
+			-- Notify the user, with a warning if we expected prettier
+			if vim.bo.filetype == "markdown" and vim.fn.executable("prettier") == 0 then
+				vim.notify("Prettier not found, yanked without reformatting", vim.log.levels.WARN)
+			else
+				vim.notify("Yanked to system clipboard", vim.log.levels.INFO)
+			end
 			return
 		end
 		-- Yank the selected text into register 'z' without affecting the unnamed register

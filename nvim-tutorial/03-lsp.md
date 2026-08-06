@@ -182,9 +182,11 @@ state.
 
 ```lua
 if vim.fn.has 'nvim-0.11' == 1 then
-  vim.lsp.config(server_name, server_config)
+  -- Modern Native API
+  vim.lsp.config[server_name] = server_config
   vim.lsp.enable(server_name)
 else
+  -- Legacy lspconfig approach
   require('lspconfig')[server_name].setup(server_config)
 end
 ```

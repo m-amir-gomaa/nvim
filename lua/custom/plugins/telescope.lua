@@ -2,7 +2,7 @@ return {
 	-- Fuzzy Finder (files, lsp, etc)
 	"nvim-telescope/telescope.nvim",
 	event = "VimEnter",
-	branch = "0.1.x",
+	branch = "master",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"jonarrien/telescope-cmdline.nvim",
@@ -29,67 +29,69 @@ return {
 		--  - Normal mode: ?
 		--
 		local telescope = require("telescope")
-		local telescopeConfig = require("telescope.config")
-		local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-		table.insert(vimgrep_arguments, "--hidden")
-		table.insert(vimgrep_arguments, "--no-ignore")
-		table.insert(vimgrep_arguments, "--glob")
-		table.insert(vimgrep_arguments, "!**/.git/*")
-		table.insert(vimgrep_arguments, "--glob")
-		table.insert(vimgrep_arguments, "!**/target/*")
-		table.insert(vimgrep_arguments, "--glob")
-		table.insert(vimgrep_arguments, "!**/.venv/*")
-		table.insert(vimgrep_arguments, "--glob")
-		table.insert(vimgrep_arguments, "!**/node_modules/*")
-		table.insert(vimgrep_arguments, "-L")
-		-- [[ Configure Telescope ]]
-		-- See `:help telescope` and `:help telescope.setup()`
-		require("telescope").setup({
-			-- You can put your default mappings / updates / etc. in here
-			--  All the info you're looking for is in `:help telescope.setup()`
-			--
-			-- defaults = {
-			--   preview = { treesitter = false },
-			-- },
-			-- defaults = {
-			--   mappings = {
-			--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-			--   },
-			-- },
+		local actions = require("telescope.actions")
+
+		telescope.setup({
 			defaults = {
-				-- `hidden = true` is not supported in text grep commands.
-				vimgrep_arguments = vimgrep_arguments,
+				vimgrep_arguments = {
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+					"--hidden",
+					"--follow",
+					"--glob",
+					"!**/.git/*",
+					"--glob",
+					"!**/result*",
+				},
+				initial_mode = "insert",
+				selection_strategy = "reset",
+				sorting_strategy = "descending", -- Switch to descending to see if it fixes the rendering order
+				layout_strategy = "horizontal",
+				layout_config = {
+					horizontal = {
+						preview_width = 0.5,
+					},
+					width = 0.9,
+					height = 0.8,
+				},
+				path_display = nil, -- DISABLE PATH TRUNCATION (0.12 Bug Trigger)
+				winblend = 0,       -- DISABLE TRANSPARENCY (Redraw Trigger)
+				mappings = {
+					i = {
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
+					},
+				},
 			},
 			pickers = {
 				find_files = {
-					theme = "ivy",
-					-- find_command must be inside find_files, not at pickers level
+					-- Use default theme instead of Ivy to rule out layout bugs
+					hidden = true,
+					follow = true,
 					find_command = {
 						"rg",
 						"--files",
 						"--hidden",
-						"--no-ignore",
+						"--follow",
 						"--glob",
 						"!**/.git/*",
 						"--glob",
-						"!**/target/*",
-						"--glob",
-						"!**/.venv/*",
-						"--glob",
-						"!**/node_modules/*",
+						"!**/result*",
 					},
 				},
 			},
-			extensions = {
-				fzf = {},
-			},
 		})
 
-		-- Enable Telescope extensions if they are installed
+		-- Enable Telescope extensions
 		pcall(require("telescope").load_extension, "fzf")
-		require("telescope").load_extension("cmdline") -- Required!
+		pcall(require("telescope").load_extension, "ui-select")
 
-		-- See `:help telescope.builtin`
+		-- Telescope remains for specialized pickers and cmdline
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -124,77 +126,6 @@ return {
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
-
-		-- Multi-grep: live grep with an optional file-glob filter separated by two spaces
-		-- Usage: type your pattern, then two spaces, then a glob  e.g. "myFunc  *.lua"
-		-- Inspired by TJ DeVries' Advent of Nvim Day 10
-		local function multi_grep(opts)
-			opts = opts or {}
-			local finders = require("telescope.finders")
-			local make_entry = require("telescope.make_entry")
-			local pickers = require("telescope.pickers")
-			local conf = require("telescope.config").values
-
-			local live_grepper = finders.new_async_job({
-				command_generator = function(prompt)
-					if not prompt or prompt == "" then
-						return nil
-					end
-					local pieces = vim.split(prompt, "  ")
-					local args = { "rg" }
-					if pieces[1] then
-						table.insert(args, "-e")
-						table.insert(args, pieces[1])
-					end
-					if pieces[2] then
-						table.insert(args, "-g")
-						table.insert(args, pieces[2])
-					end
-					return vim.iter({
-						args,
-						{
-							"--no-ignore",
-							"--glob",
-							"!**/.git/*",
-							"--glob",
-							"!**/target/*",
-							"--glob",
-							"!**/.venv/*",
-							"--glob",
-							"!**/node_modules/*",
-							"--color=never",
-							"--no-heading",
-							"--with-filename",
-							"--line-number",
-							"--column",
-							"--smart-case",
-						},
-					})
-						:flatten()
-						:totable()
-				end,
-				entry_maker = make_entry.gen_from_vimgrep(opts),
-				cwd = opts.cwd,
-			})
-
-			pickers
-				.new(opts, {
-					debounce = 100,
-					prompt_title = "Multi Grep  (pattern  [  glob])",
-					finder = live_grepper,
-					previewer = conf.grep_previewer(opts),
-					sorter = require("telescope.sorters").empty(),
-				})
-				:find()
-		end
-
-		vim.keymap.set("n", "<leader>sM", multi_grep, { desc = "[S]earch [M]ulti-grep (pattern  glob)" })
-
-		vim.keymap.set("n", ";", "<cmd>Telescope cmdline<cr>", { desc = "[C]mdline" })
-		-- Fallback for the traditional command line in case Telescope crashes
-		vim.keymap.set("n", "<leader>;", ":", { desc = "Traditional [;]cmdline" })
-		-- vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
-		-- vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
 		-- Multi-ripgrep: scope your grep by typing "pattern  glob" (two spaces = separator)
 		-- Examples:
@@ -243,15 +174,8 @@ return {
 							"--column",
 							"--smart-case",
 							"--hidden",
-							"--no-ignore",
 							"--glob",
 							"!**/.git/*",
-							"--glob",
-							"!**/target/*",
-							"--glob",
-							"!**/.venv/*",
-							"--glob",
-							"!**/node_modules/*",
 						},
 					})
 						:flatten()
@@ -274,5 +198,9 @@ return {
 		end
 
 		vim.keymap.set("n", "<leader>sM", multi_grep, { desc = "[S]earch [M]ulti-grep (pattern  glob)" })
+
+		vim.keymap.set("n", ";", "<cmd>Telescope cmdline<cr>", { desc = "[C]mdline" })
+		-- Fallback for the traditional command line in case Telescope crashes
+		vim.keymap.set("n", "<leader>;", ":", { desc = "Traditional [;]cmdline" })
 	end,
 }
